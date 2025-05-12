@@ -1,0 +1,14 @@
+Copyright © Ryan Vankriekinge 2025. All rights reserved.
+
+This work is provided for educational and reference purposes only.
+
+You are permitted to:
+- View and refer to this work.
+- Suggest contributions via GitHub (e.g., pull requests or issues).
+
+You are not permitted to:
+- Reuse, copy, modify, or redistribute any part of this work for other projects.
+- Use this work or its components for commercial purposes.
+- Host or publish this work elsewhere without explicit written permission from the author.
+
+By accessing this repository, you agree to abide by these terms.

@@ -23,4 +23,16 @@ To start the development server, run <br>
 ## License
 This project is licensed under the terms described in the [LICENSE.txt](./LICENSE.txt) file.
 
-## Sources
+## References
+
+1. **Creating .gitignore file**  
+   Used [gitignore.io](https://www.toptal.com/developers/gitignore) to generate a `.gitignore` file for a Node.js project.
+
+2. **Installing Vite**  
+   Followed the official [Vite Getting Started Guide](https://vitejs.dev/guide/) to scaffold the project using Vite.
+
+3. **Setting up Vue with Vite**  
+   Used the official [Vue 3 + Vite template](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to create a new Vue application powered by Vite.
+
+4. **Vue.js Documentation**  
+   Referred to the [Vue 3 official documentation](https://vuejs.org/guide/introduction.html) for component setup, reactivity system, and project structure.

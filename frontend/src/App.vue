@@ -4,10 +4,7 @@
       <div class="wrapper">
         <nav>
           <ul class="desktop-nav">
-            <li><RouterLink to="/">Home</RouterLink></li>
-            <li><RouterLink to="/about">More About Me</RouterLink></li>
-            <li><RouterLink to="/works">My Works</RouterLink></li>
-            <li><RouterLink to="/contact">Contact</RouterLink></li>
+            <li><router-link to="/">Home</router-link></li>
           </ul>
         </nav>
       </div>

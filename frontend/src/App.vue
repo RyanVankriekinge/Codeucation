@@ -4,7 +4,7 @@
       <div class="wrapper">
         <nav>
           <ul class="desktop-nav">
-            <li><RouterLink to="/">Home</RouterLink></li>
+            <li><router-link to="/">Home</router-link></li>
           </ul>
         </nav>
       </div>

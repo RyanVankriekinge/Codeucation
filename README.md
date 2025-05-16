@@ -3,8 +3,8 @@
 ## Set-up guide
 ### Requirements
 Make sure you have the following installed: <br>
-**Node.js** (version 18 recommended)<br>
-**npm** (version 9 recommended)
+**Node.js** (version 22 recommended)<br>
+**npm** (version 10 recommended)
 
 ### Node installation
 
@@ -13,6 +13,8 @@ Check your node version with <br> `node -v`<br>
 If you don't have Node.js and npm installed, download and install the latest stable version from [Node.js official website](https://nodejs.org/en/download/package-manager)
 
 ### Dependency installation
+
+Check your npm version with <br> `npm -v`<br>
 
 To install the dependencies, run the following command <br> `npm install`
 
@@ -36,3 +38,6 @@ This project is licensed under the terms described in the [LICENSE.txt](./LICENS
 
 4. **Vue.js Documentation**  
    Referred to the [Vue 3 official documentation](https://vuejs.org/guide/introduction.html) for component setup, reactivity system, and project structure.
+
+5. **Vue.js Router installation**  
+   Followed [The official Router for Vue.js](https://router.vuejs.org/)

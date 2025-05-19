@@ -1,10 +1,12 @@
 <template>
   <header>
-    <div class="outer-wrapper">
+    <div class="outer-wrapper desktop-nav">
       <div class="wrapper">
         <nav>
-          <ul class="desktop-nav">
-            <li><router-link to="/">Home</router-link></li>
+          <p class="logo">Codeucation</p>
+          <ul>
+            <li><router-link to="/">Handleiding</router-link></li>
+            <li><router-link to="/">Log in</router-link></li>
           </ul>
         </nav>
       </div>

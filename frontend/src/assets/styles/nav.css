@@ -1,0 +1,37 @@
+.desktop-nav {
+    background-color: #031F67;
+    margin: 0 !important;
+    width: 100%;
+    display: flex;
+}
+
+.desktop-nav ul{
+    display: flex;
+}
+
+.desktop-nav li{
+    list-style: none;
+    margin: auto 40px;
+
+}
+  
+.desktop-nav a {
+    font-family: 'Segoe UI';
+    font-size: 15px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+nav{
+    width: 100%;
+    display: flex;
+    font-style: black;
+}
+
+.logo{
+    font-family: 'Poppins';
+    font-size: 25px;
+    color: white;
+    margin: 10px;
+    line-height: auto;
+}

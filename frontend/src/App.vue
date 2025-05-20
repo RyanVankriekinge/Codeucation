@@ -3,11 +3,16 @@
     <div class="outer-wrapper desktop-nav">
       <div class="wrapper">
         <nav>
-          <p class="logo">Codeucation</p>
-          <ul>
-            <li><router-link to="/">Handleiding</router-link></li>
-            <li><router-link to="/">Log in</router-link></li>
-          </ul>
+          <div class="nav-left">
+            <p class="logo">Code<span class="highlight-blue">ucation</span></p>
+            <ul class="nav-links">
+              <li><router-link to="/">Handleiding</router-link></li>
+            </ul>
+          </div>
+
+          <div class="login-button">
+            <router-link to="/" class="button-small-white">Log in</router-link>
+          </div>
         </nav>
       </div>
     </div>

@@ -18,3 +18,15 @@ body {
   max-width: 1250px;
   margin: 0px auto;
 }
+
+.highlight-blue{
+  color: #5DA9F6;
+}
+
+.button-small-white{
+  padding: 5px 20px;
+  background-color: white;
+  border-radius: 20px;
+  color: #031F67 !important;
+  font-weight: normal;
+}

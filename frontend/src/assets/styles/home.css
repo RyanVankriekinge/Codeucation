@@ -1,0 +1,27 @@
+.introduction-title{
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 0px;
+    margin-bottom: 15px;
+}
+
+.introduction-subtitle{
+    color: #8BC0F6;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 0px !important;
+}
+
+.introduction button{
+    padding: 15px 25px;
+    border-radius: 15px;
+    border: none;
+    color: #031F67 !important;
+}
+
+.introduction{
+    margin-bottom: 100px;
+}

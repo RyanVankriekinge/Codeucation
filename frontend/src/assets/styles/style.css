@@ -14,7 +14,7 @@ body {
 }
 
 .wrapper{
-  width: 90vw;
+  width: 80vw;
   max-width: 1250px;
   margin: 0px auto;
 }
@@ -29,4 +29,14 @@ body {
   border-radius: 20px;
   color: #031F67 !important;
   font-weight: normal;
+}
+
+.section{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+}
+
+.column50{
+  width: 48%;
 }

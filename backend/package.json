@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "codeucation backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "rvankriekinge",
+  "license": "SEE LICENSE IN LICENSE.txt"
+}

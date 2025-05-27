@@ -1,4 +1,5 @@
 const { getDB } = require('../db');
+const bcrypt = require('bcrypt');
 
 exports.registerUser = async (req, res) => {
     const { name, username, email, password, role } = req.body;
@@ -8,10 +9,12 @@ exports.registerUser = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ success: false, message: 'Email or username already in use' });
         }
+        const hashedPassword = await bcrypt.hash(password, 10);
         const result = await db.collection('Users').insertOne({
             name,
             username,
             email,
+            password: hashedPassword,
             role
         });
         res.status(201).json({ success: true, userId: result.insertedId });

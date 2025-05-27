@@ -1,0 +1,42 @@
+const express = require('express');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const { connectToDB } = require('./db');
+const userRoutes = require('./routes/userRoutes');
+
+const app = express();
+const port = 3000;
+
+// Middleware
+app.use(cors({
+    origin: ['http://localhost:8080', 'http://127.0.0.1:5500'],
+    credentials: true
+}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+    secret: 'setsecrethere',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false,
+        path: '/',
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}));
+
+// Routes
+app.use('/api/users', userRoutes);
+
+// Connect to Mongo db and start server
+connectToDB()
+    .then(() => {
+        app.listen(port, () => {
+            console.log(`Server is running at http://localhost:${port}`);
+        });
+    })
+    .catch(err => {
+        console.error('Failed to connect to DB:', err);
+    });

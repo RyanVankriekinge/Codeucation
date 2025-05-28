@@ -4,7 +4,7 @@
         <div class="blue login-column-left">
             <div class="login-logo-container">
                 <p class="logo-big">Code<span class="highlight-blue">ucation</span></p>
-                <p class="slogan">Leer programmeren aan de hand van automatische testing!</p>
+                <p class="slogan">Leer programmeren met directe feedback!</p>
             </div>
         </div>
         <div class="vertical-wave">

@@ -11,7 +11,7 @@
           </div>
 
           <div class="login-button">
-            <router-link to="/" class="button-small-white">Log in</router-link>
+            <router-link to="/login" class="button-small-white">Log in</router-link>
           </div>
         </nav>
       </div>

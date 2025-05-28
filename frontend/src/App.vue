@@ -1,7 +1,6 @@
 <template>
   <header>
-    <div class="outer-wrapper desktop-nav">
-      <div class="wrapper">
+    <div v-if="!hideNav" class="outer-wrapper desktop-nav">      <div class="wrapper">
         <nav>
           <div class="nav-left">
             <p class="logo">Code<span class="highlight-blue">ucation</span></p>
@@ -37,9 +36,9 @@
         <path d="M0,0 A720,70 0 0,0 1440,0 L1440,0 L0,0 Z" fill="#031F67" />
       </svg>
     </div>
-    <div v-else>
+    <div v-else-if="!hideNav">
       <svg viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,0 A720,20 0 0,0 1440,0 L1440,0 L0,0 Z" fill="#031F67" />
+          <path d="M0,0 A720,20 0 0,0 1440,0 L1440,0 L0,0 Z" fill="#031F67" />
       </svg>
     </div>
   </header>
@@ -61,4 +60,5 @@
   const route = useRoute()
   console.log('ROUTE:', route)
   const isHome = computed(() => route?.name === 'home')
+  const hideNav = computed(() => ['login', 'register'].includes(route?.name))
 </script>

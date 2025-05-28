@@ -19,10 +19,14 @@
                     <label for="email">Email</label>
                     <input type="email" id="email" required>
                     
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
+                    <label for="wachtwoord">Wachtwoord</label>
+                    <input type="wachtwoord" id="wachtwoord" required>
                     
                     <button type="submit" class="big-button">Log In</button>
+                    <p class="button-subtitle">
+                        Heb je nog geen account?
+                        <a href="/register" class="button-subtitle-link">Registreer</a>
+                    </p>
                 </form>
             </div>
         </div>

@@ -40,7 +40,7 @@
 
 .login-form input {
     width: 95%;
-    padding: 0.5rem;
+    padding: 0.3rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
@@ -71,4 +71,16 @@
     height: fit-content;
     margin: auto;
     max-width: 60%;
+}
+
+.button-subtitle{
+    font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.button-subtitle-link{
+    text-decoration: underline;
+    color: inherit;
+    cursor: pointer;
 }

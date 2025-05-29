@@ -34,6 +34,18 @@
                     <label for="wachtwoord-bevestigen">Wachtwoord bevestigen</label>
                     <input type="wachtwoord-bevestigen" id="wachtwoord-bevestigen" required>
                     
+                    <label>Kies accounttype</label>
+                    <div class="role-selection">
+                    <label>
+                        <input type="radio" name="rol" value="leraar" required>
+                        Leraar
+                    </label>
+                    <label>
+                        <input type="radio" name="rol" value="leerling">
+                        Leerling
+                    </label>
+                    </div>
+
                     <button type="submit" class="big-button">Ga aan de slag!</button>
                     <p class="button-subtitle">
                         Heb je al een account?

@@ -50,3 +50,36 @@ exports.registerUser = async (req, res) => {
     }
 };
 
+
+exports.loginUser = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const db = getDB();
+        const user = await db.collection('Users').findOne({ email });
+
+        if (!user) {
+            return res.json({ success: false, message: 'Ongeldig e-mailadres of wachtwoord' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.json({ success: false, message: 'Ongeldig e-mailadres of wachtwoord' });
+        }
+
+        req.session.user = {
+            userId: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role
+        };
+
+        req.session.save(err => {
+            if (err) return res.status(500).json({ success: false, message: 'Sessie opslaan mislukt' });
+            res.json({ success: true, userId: user._id });
+        });
+    } catch (error) {
+        console.error('Fout bij inloggen:', error);
+        res.status(500).json({ success: false, message: 'Serverfout' });
+    }
+};

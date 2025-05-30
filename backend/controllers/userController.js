@@ -70,6 +70,7 @@ exports.loginUser = async (req, res) => {
         req.session.user = {
             userId: user._id,
             username: user.username,
+            firstname: user.firstname,
             email: user.email,
             role: user.role
         };
@@ -83,3 +84,13 @@ exports.loginUser = async (req, res) => {
         res.status(500).json({ success: false, message: 'Serverfout' });
     }
 };
+
+exports.checkLogin = (req, res) => {
+    if (req.session && req.session.user) {
+        const { username, email, userId, role, firstname } = req.session.user;
+        res.json({ success: true, username, email, userId, role, firstname });
+    } else {
+        res.json({ success: false, message: 'User is not authenticated' });
+    }
+};
+

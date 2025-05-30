@@ -94,3 +94,10 @@ exports.checkLogin = (req, res) => {
     }
 };
 
+exports.logout = (req, res) => {
+    req.session.destroy(err => {
+        if (err) return res.status(500).json({ success: false, message: 'Failed to logout' });
+        res.clearCookie('connect.sid');
+        res.json({ success: true, message: 'Logged out successfully' });
+    });
+};

@@ -60,28 +60,27 @@
 </template>
 
 <script setup>
-  import { useRoute, useRouter } from 'vue-router'
-  import { computed, ref, onMounted } from 'vue'
+  import { useRoute, useRouter } from 'vue-router';
+  import { computed, ref, onMounted, watch } from 'vue';
 
-  const route = useRoute()
-  const router = useRouter()
+  const route = useRoute();
+  const router = useRouter();
 
-  const isHome = computed(() => route?.name === 'home')
-  const hideNav = computed(() => ['login', 'register'].includes(route?.name))
+  const isHome = computed(() => route?.name === 'home');
+  const hideNav = computed(() => ['login', 'register'].includes(route?.name));
 
-  const user = ref(null)
+  const user = ref(null);
 
-  
   function goToLogin() {
     router.push('/login');
   }
 
-  onMounted(async () => {
+  async function checkLogin() {
     try {
       const response = await fetch('http://localhost:3000/api/users/check-login', {
         credentials: 'include'
-      })
-      const result = await response.json()
+      });
+      const result = await response.json();
       console.log('Check-login response:', result);
       if (result.success) {
         user.value = result;
@@ -89,7 +88,16 @@
         user.value = null;
       }
     } catch (error) {
-      console.error('Failed to fetch user:', error)
+      console.error('Failed to fetch user:', error);
     }
-  })
+  }
+
+  onMounted(checkLogin);
+
+  watch(
+    () => route.fullPath,
+    () => {
+      checkLogin();
+    }
+  );
 </script>

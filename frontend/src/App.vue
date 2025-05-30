@@ -10,7 +10,11 @@
           </div>
 
           <div class="login-button">
-            <router-link to="/login" class="button-small-white">Log in</router-link>
+            <router-link
+              :to="user ? '/profile' : '/login'"
+              class="button-small-white">
+              {{ user ? user.firstname : 'Log in' }}
+            </router-link>
           </div>
         </nav>
       </div>
@@ -54,11 +58,31 @@
 </template>
 
 <script setup>
-  import { useRoute } from 'vue-router'
-  import { computed } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
+  import { computed, ref, onMounted } from 'vue'
 
   const route = useRoute()
-  console.log('ROUTE:', route)
+  const router = useRouter()
+
   const isHome = computed(() => route?.name === 'home')
   const hideNav = computed(() => ['login', 'register'].includes(route?.name))
+
+  const user = ref(null)
+
+  onMounted(async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/users/check-login', {
+        credentials: 'include'
+      })
+      const result = await response.json()
+      console.log('Check-login response:', result);
+      if (result.success) {
+        user.value = result;
+      } else {
+        user.value = null;
+      }
+    } catch (error) {
+      console.error('Failed to fetch user:', error)
+    }
+  })
 </script>

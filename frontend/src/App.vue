@@ -26,7 +26,9 @@
             <div class="column50">
               <p class="introduction-subtitle">Lesgeven met vertrouwen dankzij leerpaden en geautomatiseerde code testing</p>
               <p class="introduction-title">Leer programmeren met directe feedback!</p>
-              <button class="big-button-white">Ga aan de slag!</button>
+              <button class="big-button-white" @click="goToLogin">
+                Ga aan de slag!
+              </button>
             </div>
             <div class="column50">
               <div id="placeholder" style="width:100%; height:100%; background:#ccc; text-align:center; font-size:20px; cursor:pointer; line-height: 8; border-radius: 20px;">
@@ -68,6 +70,11 @@
   const hideNav = computed(() => ['login', 'register'].includes(route?.name))
 
   const user = ref(null)
+
+  
+  function goToLogin() {
+    router.push('/login');
+  }
 
   onMounted(async () => {
     try {

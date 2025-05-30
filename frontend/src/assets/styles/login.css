@@ -6,6 +6,7 @@
 .vertical-wave{
     height: 100vh;
     flex-shrink: 0;
+    z-index: -1;
 }
 
 .login-column-left{

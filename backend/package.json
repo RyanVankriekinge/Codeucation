@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "codeucation backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "rvankriekinge",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.5.0"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "mongodb": "^6.16.0",
+    "mongoose": "^8.15.0"
+  }
+}

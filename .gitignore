@@ -160,6 +160,26 @@ dist
 .history
 .ionide
 
+### IntelliJ IDEA ###
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Node.js
+node_modules/
+.env
+dist/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json # optional (keep if you want consistent installs)
+
+# Logs
+logs/
+*.log
+
 ### Vue ###
 # gitignore template for Vue.js projects
 #

@@ -9,6 +9,13 @@
     z-index: -1;
 }
 
+.login-title{
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #031F67;
+}
+
 .login-column-left{
   width: 55%;
   display: flex;

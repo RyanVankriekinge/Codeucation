@@ -5,22 +5,22 @@
         <div class="section">
           <div class="column66">
             <div class="klassen-container">
-              <router-link class="klas-container" to="/klas">
+              <router-link class="klas-container" to="/classroom">
                 <p class="klas-naam">5A Wetenschappen</p>
                 <p class="klas-school">Atheneum</p>
                 <p class="klas-aantal">25 leerlingen</p>
               </router-link>
-              <router-link class="klas-container" to="/klas">
+              <router-link class="klas-container" to="/classroom">
                 <p class="klas-naam">5A Wetenschappen</p>
                 <p class="klas-school">Atheneum</p>
                 <p class="klas-aantal">25 leerlingen</p>
               </router-link>
-              <router-link class="klas-container" to="/klas">
+              <router-link class="klas-container" to="/classroom">
                 <p class="klas-naam">5A Wetenschappen</p>
                 <p class="klas-school">Atheneum</p>
                 <p class="klas-aantal">25 leerlingen</p>
               </router-link>
-              <router-link class="klas-container" to="/klas">
+              <router-link class="klas-container" to="/classroom">
                 <p class="klas-naam">5A Wetenschappen</p>
                 <p class="klas-school">Atheneum</p>
                 <p class="klas-aantal">25 leerlingen</p>

@@ -14,7 +14,7 @@
       </div>
       <div class="white login-column-right login-form-container">
         <div class="login-form">
-          <h1>Registreren</h1>
+          <p class="login-title">Registreren</p>
           <form @submit.prevent="register">
             <label for="achternaam">Achternaam</label>
             <input v-model="achternaam" type="text" id="achternaam" required>

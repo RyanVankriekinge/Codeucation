@@ -14,7 +14,7 @@
         </div>
         <div class="white login-column-right login-form-container">
             <div class="login-form">
-                <h1>Log in</h1>
+                <p class="login-title">Log in</p>
                 <form @submit.prevent="login">
                     <label for="email">Email</label>
                     <input type="email" id="email" v-model="email" required>

@@ -98,8 +98,21 @@ body {
   width: 60%;
 }
 
+.column33{
+  width: 30%;
+  padding: 20px;
+  border-radius: 40px;
+  min-width: 250px;
+  margin-bottom: 40px;
+}
+
+.column33 *{
+  margin-left: 20px;
+}
+
 .blue{
   background-color: #031F67;
+  color: white;
 }
 
 .white{
@@ -108,9 +121,29 @@ body {
 
 h1{
   font-family: 'Poppins', sans-serif;
-  font-size: 50px;
+  font-size: 30px;
   font-weight: bold;
   color: #031F67;
+  margin-bottom: 0px;
+}
+
+h2{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(44, 43, 43);
+  font-weight: 400;
+  margin-top: 0px;
+  font-size: 20px;
+}
+
+h3{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #031F67;
+    font-weight: 500;
+    margin-top: 40px;
+}
+
+p{
+  font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
 }
 
 .profile-picture-container{
@@ -122,4 +155,18 @@ h1{
   width: 60%;
   border-radius: 200px;
   margin: auto;
+}
+
+.column33-title{
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.column33-listing{
+  margin-top: 0px;
+  margin-bottom: 10px;
 }

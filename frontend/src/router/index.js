@@ -5,6 +5,7 @@ import Login from '../views/LoginView.vue'
 import Register from '../views/RegisterView.vue'
 import Dashboard from '../views/DashboardView.vue'
 import Profile from '../views/ProfileView.vue'
+import Classroom from '../views/ClassroomView.vue'
 
 
 const routes = [
@@ -12,7 +13,8 @@ const routes = [
   { path: '/login', name: 'login', component: Login },
   { path: '/register', name: 'register', component: Register },
   { path: '/dashboard', name: 'dashboard', component: Dashboard },
-  { path: '/profile', name: 'profile', component: Profile }
+  { path: '/profile', name: 'profile', component: Profile },
+  { path: '/classroom', name: 'classroom', component: Classroom }
 
 
 ]

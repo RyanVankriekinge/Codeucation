@@ -1,14 +1,18 @@
 <template>
   <header>
-    <div v-if="!hideNav" class="outer-wrapper desktop-nav">      <div class="wrapper">
+    <div v-if="!hideNav" class="outer-wrapper desktop-nav">
+      <div class="wrapper">
         <nav>
           <div class="nav-left">
-            <p class="logo">Code<span class="highlight-blue">ucation</span></p>
+            <router-link to="/" class="logo">
+              Code<span class="highlight-blue">ucation</span>
+            </router-link>
             <ul class="nav-links">
+              <li v-if="user"><router-link to="/dashboard">Klassen</router-link></li>
+              <li v-if="user"><router-link to="/cursussen">Cursussen</router-link></li>
               <li><router-link to="/">Handleiding</router-link></li>
             </ul>
           </div>
-
           <div class="login-button">
             <router-link
               :to="user ? '/profile' : '/login'"
@@ -38,18 +42,18 @@
           </div>
         </div>
       </div>
-      <svg viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg">
         <path d="M0,0 A720,70 0 0,0 1440,0 L1440,0 L0,0 Z" fill="#031F67" />
       </svg>
     </div>
+
     <div v-else-if="!hideNav">
-      <svg viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,0 A720,20 0 0,0 1440,0 L1440,0 L0,0 Z" fill="#031F67" />
+      <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 A720,20 0 0,0 1440,0 L1440,0 L0,0 Z" fill="#031F67" />
       </svg>
     </div>
   </header>
-  <router-view>
-  </router-view>
+  <router-view></router-view>
   <div></div>
   <footer>
     <div class="outer-wrapper">

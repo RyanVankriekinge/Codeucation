@@ -45,7 +45,7 @@ nav{
 
 .logo{
     font-family: 'Poppins';
-    font-size: 25px;
+    font-size: 25px !important;
     font-weight: 900;
     color: white;
     margin: 10px;

@@ -56,6 +56,8 @@ body {
 
 .button-small-white{
   padding: 4px 19px;
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: white;
   border-radius: 20px;
   color: #031F67 !important;
@@ -85,11 +87,15 @@ body {
 .section{
   display: flex;
   justify-content: space-between;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .column50{
   width: 48%;
+}
+
+.column66{
+  width: 60%;
 }
 
 .blue{
@@ -105,4 +111,15 @@ h1{
   font-size: 50px;
   font-weight: bold;
   color: #031F67;
+}
+
+.profile-picture-container{
+  display: flex;
+  justify-content: center;
+}
+
+.profile-picture{
+  width: 60%;
+  border-radius: 200px;
+  margin: auto;
 }

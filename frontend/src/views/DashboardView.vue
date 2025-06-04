@@ -54,6 +54,9 @@
   background-color: #D5E4FE;
   text-decoration: none;
 }
+.klas-container:hover{
+  background-color: #c3d8f5;
+}
 .klas-container p{
   margin: 20px;
 }

@@ -8,7 +8,7 @@
             <h2>Aangeboden door Codeucation</h2>
             <h3>Inhoud van deze cursus</h3>
             <p class="course-description">Deze cursus biedt een uitgebreide introductie tot Python, met een focus op concepten en vaardigheden  die aansluiten bij de leerplannen van de derde graad secundair onderwijs. Onderwerpen zoals variabelen,  loops, functies, en datastructuren worden stap voor stap uitgelegd en aangevuld met relevante oefeningen.</p>
-            <router-link to="/course/chapter"><button class="big-button">Leer deze cursus</button></router-link>
+            <router-link to="/course/overview"><button class="big-button">Leer deze cursus</button></router-link>
             <h3>Overzicht klassen</h3>
             <div class="classrooms-container">
                 <router-link to="/classroom" class="classroom-link">
@@ -44,7 +44,7 @@
 
           <div class="column33 blue">
             <p class="column33-title">Hoofdstukken</p>
-            <router-link v-for="n in 23" :key="n" to="/studentprofile" class="column33-listing">
+            <router-link v-for="n in 23" :key="n" to="/course/chapter" class="column33-listing">
               Naam hoofdstuk {{ n }}
             </router-link>
           </div>

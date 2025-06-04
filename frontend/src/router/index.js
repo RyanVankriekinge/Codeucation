@@ -7,6 +7,7 @@ import Dashboard from '../views/DashboardView.vue'
 import Profile from '../views/ProfileView.vue'
 import Classroom from '../views/ClassroomView.vue'
 import Course from '../views/CourseView.vue'
+import CourseOverview from '../views/CourseOverviewView.vue'
 
 
 const routes = [
@@ -16,7 +17,9 @@ const routes = [
   { path: '/dashboard', name: 'dashboard', component: Dashboard },
   { path: '/profile', name: 'profile', component: Profile },
   { path: '/classroom', name: 'classroom', component: Classroom },
-  { path: '/course', name: 'course', component: Course }
+  { path: '/course', name: 'course', component: Course },
+  { path: '/course/overview', name: 'course-overview', component: CourseOverview }
+
 
 
 ]

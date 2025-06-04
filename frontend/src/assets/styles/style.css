@@ -125,6 +125,7 @@ h1{
   font-weight: bold;
   color: #031F67;
   margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 h2{
@@ -139,7 +140,7 @@ h3{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #031F67;
     font-weight: 500;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 p{

@@ -10,7 +10,7 @@
             <progress class="course-progress large" max="100" :value="70"></progress>
             <h3>Huidig hoofdstuk</h3>
             <div class="chapters-container">
-              <router-link to="/classroom" class="chapter-link">
+              <router-link to="/course/chapter" class="chapter-link">
                 <div class="chapter-container">
                   <h4 class="chapter-title">Variabelen</h4>
                   <div class="chapter-info">
@@ -27,7 +27,7 @@
             </div>
 
             <h3>Hoofdstuk kiezen</h3>
-            <router-link to="/classroom" class="chapter-link">
+            <router-link to="/course/chapter" class="chapter-link">
               <div class="chapter-container">
                 <h4 class="chapter-title">Variabelen</h4>
                 <div class="chapter-info">
@@ -41,7 +41,7 @@
                 </div>
               </div>
             </router-link>
-                        <router-link to="/classroom" class="chapter-link">
+                        <router-link to="/course/chapter" class="chapter-link">
               <div class="chapter-container">
                 <h4 class="chapter-title">Variabelen</h4>
                 <div class="chapter-info">
@@ -55,7 +55,7 @@
                 </div>
               </div>
             </router-link>
-                        <router-link to="/classroom" class="chapter-link">
+                        <router-link to="/course/chapter" class="chapter-link">
               <div class="chapter-container">
                 <h4 class="chapter-title">Variabelen</h4>
                 <div class="chapter-info">
@@ -69,7 +69,7 @@
                 </div>
               </div>
             </router-link>
-                        <router-link to="/classroom" class="chapter-link">
+                        <router-link to="/course/chapter" class="chapter-link">
               <div class="chapter-container">
                 <h4 class="chapter-title">Variabelen</h4>
                 <div class="chapter-info">
@@ -83,7 +83,7 @@
                 </div>
               </div>
             </router-link>
-                        <router-link to="/classroom" class="chapter-link">
+                        <router-link to="/course/chapter" class="chapter-link">
               <div class="chapter-container">
                 <h4 class="chapter-title">Variabelen</h4>
                 <div class="chapter-info">

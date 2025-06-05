@@ -125,6 +125,7 @@ h1{
   font-weight: bold;
   color: #031F67;
   margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 h2{
@@ -139,7 +140,7 @@ h3{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #031F67;
     font-weight: 500;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 p{
@@ -177,4 +178,34 @@ p{
 }
 .column33-listing:hover {
   text-decoration: underline;
+}
+
+.code-segment{
+  padding: 20px;
+  background-color: #031F67;
+  color: white;
+  border-radius: 20px;
+  margin-bottom: 0px;
+}
+
+.code-segment p{
+  margin: 0px;
+  margin-bottom: 2px;
+}
+
+.code-explanation{
+  margin-top: 5px;
+  color: #525763;
+  font-size: 14px;
+}
+
+.indented{
+  text-indent: 2em;
+}
+
+.chapter-theory{
+  margin-bottom: 50px;
+  padding: 20px;
+  border: 2px solid grey;
+  border-radius: 0px 30px 30px 30px;
 }

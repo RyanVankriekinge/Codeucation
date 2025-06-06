@@ -15,3 +15,14 @@ exports.createSchool = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+
+exports.getAllSchools = async (req, res) => {
+    try {
+        const db = getDB();
+        const schools = await db.collection('Schools').find().toArray();
+        res.json(schools);
+    } catch (error) {
+        console.error('Error getting schools:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};

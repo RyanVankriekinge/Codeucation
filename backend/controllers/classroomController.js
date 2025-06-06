@@ -22,3 +22,13 @@ exports.createClassroom = async (req, res) => {
     }
 };
 
+exports.getAllClassrooms = async (req, res) => {
+    try {
+        const db = getDB();
+        const classrooms = await db.collection('Classrooms').find().toArray();
+        res.json(classrooms);
+    } catch (error) {
+        console.error('Error getting classrooms:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};

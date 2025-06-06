@@ -3,7 +3,9 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { connectToDB } = require('./db');
+
 const userRoutes = require('./routes/userRoutes');
+const schoolRoutes = require('./routes/schoolRoutes');
 
 const app = express();
 const port = 3000;
@@ -29,6 +31,7 @@ app.use(session({
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/schools', schoolRoutes);
 
 // Connect to Mongo db and start server
 connectToDB()

@@ -25,6 +25,18 @@ To start the development server, run <br>
 ## License
 This project is licensed under the terms described in the [LICENSE.txt](./LICENSE.txt) file.
 
+## Test credentials
+Use the following credentials to log in and test the application:
+
+| Role    | Email                                         | Password |
+| ------- | --------------------------------------------- | -------- |
+| Teacher | leraar1@test.be | test123  |
+| Student | leerling1@test.be | test123  |
+
+### Note
+- Student accounts follow the pattern leerling[number]@test.be (e.g., leerling2@test.be, leerling3@test.be), all with the password test123.
+- These credentials are for testing purposes only.
+
 ## References
 
 1. **Creating .gitignore file**  

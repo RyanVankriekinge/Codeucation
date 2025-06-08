@@ -79,3 +79,6 @@ Use the following credentials to log in and test the application:
     Based on my own application 'BugBytes':  
     - [BugBytes (front-end)](https://github.com/EHB-MCT/web2-course-project-front-end-RyanVankriekinge)  
     - [BugBytes (back-end)](https://github.com/EHB-MCT/web2-course-project-back-end-RyanVankriekinge)
+
+14. **Searching by ID in MongoDB**  
+    Referenced [How to search by ID in MongoDB](https://www.geeksforgeeks.org/how-to-search-by-id-in-mongodb/).

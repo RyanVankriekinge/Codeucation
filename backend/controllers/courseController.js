@@ -1,4 +1,5 @@
 const { getDB } = require('../db');
+const { ObjectId } = require('mongodb');
 
 exports.createCourse = async (req, res) => {
     try {
@@ -35,6 +36,28 @@ exports.getAllCourses = async (req, res) => {
         res.json(courses);
     } catch (error) {
         console.error('Error getting courses:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
+
+exports.getCourseById = async (req, res) => {
+    try {
+        const db = getDB();
+        const courseId = req.params.id;
+
+        if (!ObjectId.isValid(courseId)) {
+            return res.status(400).json({ success: false, message: 'Invalid course ID' });
+        }
+
+        const course = await db.collection('Courses').findOne({ _id: new ObjectId(courseId) });
+
+        if (!course) {
+            return res.status(404).json({ success: false, message: 'Course not found' });
+        }
+
+        res.json(course);
+    } catch (error) {
+        console.error('Error getting course by ID:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };

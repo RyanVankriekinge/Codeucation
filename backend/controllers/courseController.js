@@ -27,3 +27,14 @@ exports.createCourse = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+
+exports.getAllCourses = async (req, res) => {
+    try {
+        const db = getDB();
+        const courses = await db.collection('Courses').find().toArray();
+        res.json(courses);
+    } catch (error) {
+        console.error('Error getting courses:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};

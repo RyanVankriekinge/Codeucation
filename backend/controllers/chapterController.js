@@ -29,3 +29,13 @@ exports.createChapter = async (req, res) => {
     }
 };
 
+exports.getAllChapters = async (req, res) => {
+    try {
+        const db = getDB();
+        const chapters = await db.collection('Chapters').find().toArray();
+        res.json(chapters);
+    } catch (error) {
+        console.error('Error fetching chapters:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};

@@ -39,3 +39,19 @@ exports.getAllChapters = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+
+exports.getChaptersByCourse = async (req, res) => {
+    try {
+        const db = getDB();
+        const { courseId } = req.params;
+
+        const courseObjectId = new ObjectId(courseId);
+
+        const chapters = await db.collection('Chapters').find({ courseId: courseObjectId }).toArray();
+
+        res.json(chapters);
+    } catch (error) {
+        console.error('Error getting chapters:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};

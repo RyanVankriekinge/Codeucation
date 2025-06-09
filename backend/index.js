@@ -9,6 +9,7 @@ const schoolRoutes = require('./routes/schoolRoutes');
 const classroomRoutes = require('./routes/classroomRoutes')
 const userClassroomRoutes = require('./routes/userClassroomRoutes');
 const courseRoutes = require('./routes/courseRoutes');
+const classroomCourseRoutes = require('./routes/classroomCourseRoutes');
 
 const app = express();
 const port = 3000;
@@ -38,6 +39,7 @@ app.use('/api/schools', schoolRoutes);
 app.use('/api/classrooms', classroomRoutes);
 app.use('/api/classroom-users', userClassroomRoutes);
 app.use('/api/courses', courseRoutes);
+app.use('/api/classroom-courses', classroomCourseRoutes);
 
 
 // Connect to Mongo db and start server

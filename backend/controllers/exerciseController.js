@@ -31,3 +31,16 @@ exports.getAllExercises = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+
+exports.getExercisesByChapterId = async (req, res) => {
+    try {
+        const db = getDB();
+        const { chapterId } = req.params;
+
+        const exercises = await db.collection('Exercises').find({ chapterId }).toArray();
+        res.json(exercises);
+    } catch (error) {
+        console.error('Error getting exercises by chapterId:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};

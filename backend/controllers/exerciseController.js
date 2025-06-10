@@ -20,3 +20,14 @@ exports.createExercise = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+
+exports.getAllExercises = async (req, res) => {
+    try {
+        const db = getDB();
+        const exercises = await db.collection('Exercises').find().toArray();
+        res.json(exercises);
+    } catch (error) {
+        console.error('Error getting exercises:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};

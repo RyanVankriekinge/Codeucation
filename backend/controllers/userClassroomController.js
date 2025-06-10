@@ -29,10 +29,29 @@ exports.getClassroomsForUser = async (req, res) => {
         }
 
         const classroomIds = userClassrooms.map(uc => new ObjectId(uc.classroomId));
+        const classrooms = await db.collection('Classrooms').find({
+            _id: { $in: classroomIds }
+        }).toArray();
 
-        const classrooms = await db.collection('Classrooms').find({_id: { $in: classroomIds }}).toArray();
-        res.json(classrooms);
+        const schoolIds = classrooms.map(c => new ObjectId(c.schoolId));
+
+        const schools = await db.collection('Schools').find({
+            _id: { $in: schoolIds }
+        }).toArray();
+
+        const findSchoolName = {};
+        schools.forEach(school => {
+            findSchoolName[school._id.toString()] = school.name;
+        });
+
+        const classroomsWithSchool = classrooms.map(classroom => ({
+            ...classroom,
+            schoolName: findSchoolName[classroom.schoolId.toString()] || "Unknown School"
+        }));
+
+        res.json(classroomsWithSchool);
     } catch (error) {
+        console.error('Error getting classrooms for user:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };

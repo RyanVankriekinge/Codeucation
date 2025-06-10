@@ -82,3 +82,6 @@ Use the following credentials to log in and test the application:
 
 14. **Searching by ID in MongoDB**  
     Referenced [How to search by ID in MongoDB](https://www.geeksforgeeks.org/how-to-search-by-id-in-mongodb/).
+
+15. **MongoDB Compass Mongosh commands**  
+    Used [MongoDB Shell Documentation](https://www.mongodb.com/docs/mongodb-shell/run-commands/) for running shell commands in MongoDB.

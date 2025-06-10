@@ -22,8 +22,8 @@ exports.getClassroomsForUser = async (req, res) => {
         if (!ObjectId.isValid(userId)) {
             return res.status(400).json({ success: false, message: 'Invalid user ID' });
         }
-        const userClassrooms = await db.collection('User_Classroom').find({ userId: new ObjectId(userId) }).toArray();
 
+        const userClassrooms = await db.collection('User_Classroom').find({ userId: new ObjectId(userId) }).toArray();
         if (userClassrooms.length === 0) {
             return res.json([]);
         }
@@ -34,7 +34,6 @@ exports.getClassroomsForUser = async (req, res) => {
         }).toArray();
 
         const schoolIds = classrooms.map(c => new ObjectId(c.schoolId));
-
         const schools = await db.collection('Schools').find({
             _id: { $in: schoolIds }
         }).toArray();
@@ -44,12 +43,23 @@ exports.getClassroomsForUser = async (req, res) => {
             findSchoolName[school._id.toString()] = school.name;
         });
 
-        const classroomsWithSchool = classrooms.map(classroom => ({
-            ...classroom,
-            schoolName: findSchoolName[classroom.schoolId.toString()] || "Unknown School"
+        const classroomWithSchoolAndPupilCount = await Promise.all(classrooms.map(async (classroom) => {
+            const usersInClassroom = await db.collection('User_Classroom').find({ classroomId: classroom._id }).toArray();
+
+            const userIds = usersInClassroom.map(uc => new ObjectId(uc.userId));
+            const users = await db.collection('Users').find({ _id: { $in: userIds } }).toArray();
+
+            const pupilCount = users.filter(user => user.role === 'leerling').length;
+
+            return {
+                ...classroom,
+                schoolName: findSchoolName[classroom.schoolId.toString()] || "Unknown School",
+                studentCount: pupilCount
+            };
         }));
 
-        res.json(classroomsWithSchool);
+
+        res.json(classroomWithSchoolAndPupilCount);
     } catch (error) {
         console.error('Error getting classrooms for user:', error);
         res.status(500).json({ success: false, message: 'Server error' });

@@ -20,8 +20,14 @@ To install the dependencies, run the following command <br> `npm install`
 
 ### Running the application
 
-To start the development server, run <br>
+To start the front-end development server, run <br>
+`cd frontend` <br>
 `npm run dev`
+
+To run the back-end server, run <br>
+`cd backend` <br>
+`node index.js`
+
 ## License
 This project is licensed under the terms described in the [LICENSE.txt](./LICENSE.txt) file.
 

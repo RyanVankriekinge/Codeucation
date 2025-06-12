@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const connectToDB = require('./db');
 
-// const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 // const schoolRoutes = require('./routes/schoolRoutes');
 // const classroomRoutes = require('./routes/classroomRoutes');
 // const userClassroomRoutes = require('./routes/userClassroomRoutes');
@@ -36,7 +36,7 @@ app.use(session({
 }));
 
 // Routes
-// app.use('/api/users', userRoutes);
+app.use('/api/users', userRoutes);
 // app.use('/api/schools', schoolRoutes);
 // app.use('/api/classrooms', classroomRoutes);
 // app.use('/api/classroom-users', userClassroomRoutes);
@@ -48,7 +48,13 @@ app.use(session({
 // Connect to MongoDB and start server
 connectToDB().then(() => {
     console.log("Database connected successfully!");
+
+    app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+    });
+
 }).catch(err => {
     console.error("Failed to connect:", err);
 });
+
 

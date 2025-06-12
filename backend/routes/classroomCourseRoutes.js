@@ -4,5 +4,6 @@ const classroomCourseController = require('../controllers/classroomCourseControl
 
 router.post('/', classroomCourseController.addClassroomCourse);
 router.get('/:classroomId', classroomCourseController.getCoursesInClassroom);
+router.put('/:classroomId/:courseId/visibility', classroomCourseController.toggleCourseVisibility);
 
 module.exports = router;

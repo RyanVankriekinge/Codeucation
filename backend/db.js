@@ -4,11 +4,7 @@ const uri = "mongodb+srv://ryanvankriekinge:ryanvankriekinge@cluster0.ytt78f6.mo
 
 async function connectToDB() {
     try {
-        await mongoose.connect(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-
+        await mongoose.connect(uri)
         console.log("Connected to MongoDB with Mongoose");
     } catch (err) {
         console.error("Failed to connect to MongoDB:", err);
@@ -16,6 +12,4 @@ async function connectToDB() {
     }
 }
 
-module.exports = {
-    connectToDB
-};
+module.exports = connectToDB;

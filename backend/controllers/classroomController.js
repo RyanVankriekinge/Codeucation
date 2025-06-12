@@ -80,13 +80,13 @@ exports.getClassroomById = async (req, res) => {
             name: user.name
         }));
 
-        const classroomCourses = await db.collection('Classroom_Courses').find({ classroomId }).toArray();
+        const classroomCourses = await db.collection('Classroom_Course').find({ classroomId }).toArray();
         const courseIds = classroomCourses.map(cc => cc.courseId);
         const courses = await db.collection('Courses').find({ _id: { $in: courseIds } }).toArray();
 
         classroom.courses = courses.map(course => ({
             _id: course._id,
-            name: course.name,
+            title: course.title,
             hidden: course.hidden || false
         }));
 

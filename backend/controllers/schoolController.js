@@ -1,15 +1,15 @@
-const { getDB } = require('../db');
+const School = require('../models/School');
 
 exports.createSchool = async (req, res) => {
     try {
-        const db = getDB();
         const { name } = req.body;
 
         if (!name) return res.status(400).json({ error: 'Name is required' });
 
-        const result = await db.collection('Schools').insertOne({ name });
+        const newSchool = new School({ name });
+        await newSchool.save();
 
-        res.status(201).json({ success: true, schoolId: result.insertedId, name });
+        res.status(201).json({ success: true, schoolId: newSchool._id, name });
     } catch (error) {
         console.error('Error creating school:', error);
         res.status(500).json({ success: false, message: 'Server error' });
@@ -18,8 +18,7 @@ exports.createSchool = async (req, res) => {
 
 exports.getAllSchools = async (req, res) => {
     try {
-        const db = getDB();
-        const schools = await db.collection('Schools').find().toArray();
+        const schools = await School.find();
         res.json(schools);
     } catch (error) {
         console.error('Error getting schools:', error);

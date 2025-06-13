@@ -91,3 +91,6 @@ Use the following credentials to log in and test the application:
 
 15. **MongoDB Compass Mongosh commands**  
     Used [MongoDB Shell Documentation](https://www.mongodb.com/docs/mongodb-shell/run-commands/) for running shell commands in MongoDB.
+
+16. **Understanding `__v` in Mongoose**  
+    Referred to [Stack Overflow: What is the `__v` field in Mongoose?](https://stackoverflow.com/questions/12495891/what-is-the-v-field-in-mongoose)

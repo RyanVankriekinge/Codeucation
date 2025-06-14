@@ -2,11 +2,11 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { connectToDB } = require('./db');
+const connectToDB = require('./db');
 
 const userRoutes = require('./routes/userRoutes');
 const schoolRoutes = require('./routes/schoolRoutes');
-const classroomRoutes = require('./routes/classroomRoutes')
+const classroomRoutes = require('./routes/classroomRoutes');
 const userClassroomRoutes = require('./routes/userClassroomRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const chapterRoutes = require('./routes/chapterRoutes');
@@ -45,14 +45,16 @@ app.use('/api/chapters', chapterRoutes);
 app.use('/api/classroom-courses', classroomCourseRoutes);
 app.use('/api/exercises', exerciseRoutes);
 
+// Connect to MongoDB and start server
+connectToDB().then(() => {
+    console.log("Database connected successfully!");
 
-// Connect to Mongo db and start server
-connectToDB()
-    .then(() => {
-        app.listen(port, () => {
-            console.log(`Server is running at http://localhost:${port}`);
-        });
-    })
-    .catch(err => {
-        console.error('Failed to connect to DB:', err);
+    app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
     });
+
+}).catch(err => {
+    console.error("Failed to connect:", err);
+});
+
+

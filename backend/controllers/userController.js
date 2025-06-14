@@ -1,23 +1,19 @@
-const { getDB } = require('../db');
+const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
 exports.registerUser = async (req, res) => {
     const { name, firstname, email, password, role } = req.body;
     try {
-        const db = getDB();
-
-        const existingUser = await db.collection('Users').findOne({ email });
+        const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ success: false, message: 'Email already in use' });
         }
 
         const baseUsername = `${firstname}${name}`.replace(/\s+/g, '');
-
-        const takenUsernames = await db.collection('Users')
-            .find({ username: { $regex: `^${baseUsername}` } })
-            .toArray();
-
         let username = baseUsername;
+
+        const takenUsernames = await User.find({ username: new RegExp(`^${baseUsername}`) });
+
         if (takenUsernames.length > 0) {
             let maxSuffix = 0;
             takenUsernames.forEach(user => {
@@ -32,38 +28,29 @@ exports.registerUser = async (req, res) => {
             username = `${baseUsername}${maxSuffix + 1}`;
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const result = await db.collection('Users').insertOne({
+        const newUser = new User({
             name,
             firstname,
             username,
             email,
-            password: hashedPassword,
+            password,
             role
         });
 
-        res.status(201).json({ success: true, userId: result.insertedId, username });
+        await newUser.save();
+        res.status(201).json({ success: true, userId: newUser._id, username });
     } catch (error) {
         console.error('Error during registration:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
 
-
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
     try {
-        const db = getDB();
-        const user = await db.collection('Users').findOne({ email });
+        const user = await User.findOne({ email });
 
-        if (!user) {
-            return res.json({ success: false, message: 'Ongeldig e-mailadres of wachtwoord' });
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-
-        if (!isMatch) {
+        if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.json({ success: false, message: 'Ongeldig e-mailadres of wachtwoord' });
         }
 

@@ -94,3 +94,6 @@ Use the following credentials to log in and test the application:
 
 16. **Understanding `__v` in Mongoose**  
     Referred to [Stack Overflow: What is the `__v` field in Mongoose?](https://stackoverflow.com/questions/12495891/what-is-the-v-field-in-mongoose)
+
+17. **Mongoose CRUD Operations & MVC Architecture**  
+    Followed [Mastering Backend Development with Node.js, MongoDB Integration, Mongoose CRUD Operations, and MVC Architecture](https://dev.to/imsushant12/mastering-backend-development-with-nodejs-mongodb-integration-mongoose-crud-operations-and-mvc-architecture-36k4)

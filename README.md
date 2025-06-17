@@ -102,3 +102,5 @@ Use the following credentials to log in and test the application:
     - Discussed and resolved the issue of `hidden` property updates not persisting after page refresh.
     - Ensured proper fetching from `ClassroomCourse` using `Promise.all()` in `getClassroomById`.
     - Fixed backend to correctly return visibility status stored in MongoDB.
+19. **Stop click event when clicking eye icon**  
+    Used [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation) to avoid router direction to course page when clicking the eye icon that hides or shows the course for students.

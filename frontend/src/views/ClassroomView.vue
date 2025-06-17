@@ -26,12 +26,13 @@
                       </g>
                     </svg>
                     <p v-if="!course.hidden">Zichtbaar voor leerlingen</p>
-                    <svg v-else xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 27.913 24.802">
-                      <g id="Icon_hidden" transform="translate(-1.976 -3.879)">
-                        <path d="M6,26.559,26.559,6M13.71,24.894a9.154,9.154,0,0,0,2.57.38c5.374,0,9.976-5.157,11.895-7.661a2.177,2.177,0,0,0,0-2.67,29.476,29.476,0,0,0-2.166-2.519" transform="translate(-0.347)" fill="none" stroke="#031F67" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                    <svg v-show="course.hidden" xmlns="http://www.w3.org/2000/svg" width="27.913" height="24.802" viewBox="0 0 27.913 24.802">
+                      <g id="Icon_akar-eye-slashed" data-name="Icon akar-eye-slashed" transform="translate(-1.976 -3.879)">
+                        <path id="Path_9" data-name="Path 9" d="M9.345,23.085A26.032,26.032,0,0,1,4.038,17.83a2.175,2.175,0,0,1,0-2.669C5.956,12.657,10.559,7.5,15.933,7.5a11.567,11.567,0,0,1,6.592,2.408" transform="translate(0 -0.215)" fill="none" stroke="#001a72" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                        <path id="Path_10" data-name="Path 10" d="M19.017,13.565a3.855,3.855,0,1,0-5.452,5.451M6,26.559,26.559,6M13.71,24.894a9.154,9.154,0,0,0,2.57.38c5.374,0,9.976-5.157,11.895-7.661a2.177,2.177,0,0,0,0-2.67,29.476,29.476,0,0,0-2.166-2.519" transform="translate(-0.347)" fill="none" stroke="#001a72" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
                       </g>
                     </svg>
-                    <p v-else>Verborgen voor leerlingen</p>
+                    <p v-show="course.hidden">Verborgen voor leerlingen</p>
                   </div>
                 </div>
               </router-link>

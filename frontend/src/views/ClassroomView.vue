@@ -50,7 +50,7 @@
               :to="`/studentprofile/${student._id}`" 
               class="column33-listing"
             >
-              {{ student.firstname }} {{ student.lastname }}
+              {{ student.firstname }} {{ student.name }}
             </router-link>
           </div>
         </div>

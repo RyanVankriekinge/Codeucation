@@ -19,7 +19,7 @@ const routes = [
   { path: '/profile', name: 'profile', component: Profile },
   { path: '/classroom/:classroomId', name: 'classroom', component: Classroom },
   {
-    path: '/courses/:courseId',
+    path: '/course/:courseId',
     name: 'course',
     component: Course,
     children: [

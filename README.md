@@ -97,3 +97,10 @@ Use the following credentials to log in and test the application:
 
 17. **Mongoose CRUD Operations & MVC Architecture**  
     Followed [Mastering Backend Development with Node.js, MongoDB Integration, Mongoose CRUD Operations, and MVC Architecture](https://dev.to/imsushant12/mastering-backend-development-with-nodejs-mongodb-integration-mongoose-crud-operations-and-mvc-architecture-36k4)
+18. **Toggling Hidden Property in MongoDB with Mongoose**  
+    Used [ChatGPT](https://chatgpt.com/share/685143a3-7b78-800c-b5e7-77b7dea4cb16)
+    - Discussed and resolved the issue of `hidden` property updates not persisting after page refresh.
+    - Ensured proper fetching from `ClassroomCourse` using `Promise.all()` in `getClassroomById`.
+    - Fixed backend to correctly return visibility status stored in MongoDB.
+19. **Stop click event when clicking eye icon**  
+    Used [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation) to avoid router direction to course page when clicking the eye icon that hides or shows the course for students.

@@ -43,19 +43,20 @@ exports.toggleCourseVisibility = async (req, res) => {
         const { classroomId, courseId } = req.params;
         const { hidden } = req.body;
 
-        if (!classroomId || !courseId) {
-            return res.status(400).json({ success: false, message: 'Missing courseId or classroomId' });
-        }
-
         const updatedCourse = await ClassroomCourse.findOneAndUpdate(
-            { courseId, classroomId },
+            { classroomId, courseId },
             { hidden },
             { new: true }
         );
 
-        res.json({ success: true, message: "Course visibility updated", updatedCourse });
+        if (!updatedCourse) {
+            return res.status(404).json({ success: false, message: "Classroom course not found" });
+        }
+
+        res.json({ success: true, updatedCourse });
     } catch (error) {
         console.error("Error updating course visibility:", error);
         res.status(500).json({ success: false, message: "Server error" });
     }
 };
+

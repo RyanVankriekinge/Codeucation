@@ -3,13 +3,19 @@ const Exercise = require('../models/Exercise');
 
 exports.createExercise = async (req, res) => {
     try {
-        const { chapterId, title } = req.body;
+        const { chapterId, title, instruction, starterCode, testFile } = req.body;
 
         if (!chapterId || !title) {
             return res.status(400).json({ success: false, message: 'chapterId and title are required' });
         }
 
-        const newExercise = new Exercise({ chapterId, title });
+        const newExercise = new Exercise({
+            chapterId,
+            title,
+            instruction,
+            starterCode,
+            testFile
+        });
         await newExercise.save();
 
         res.status(201).json({

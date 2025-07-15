@@ -29,6 +29,25 @@ exports.createExercise = async (req, res) => {
     }
 };
 
+exports.getExerciseById = async (req, res) => {
+    try {
+        const { exerciseId } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
+            return res.status(400).json({ success: false, message: 'Invalid exercise ID' });
+        }
+
+        const exercise = await Exercise.findById(exerciseId);
+        if (!exercise) {
+            return res.status(404).json({ success: false, message: 'Exercise not found' });
+        }
+
+        res.json(exercise);
+    } catch (error) {
+        console.error('Error getting exercise by ID:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
+
 exports.getAllExercises = async (req, res) => {
     try {
         const exercises = await Exercise.find();

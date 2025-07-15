@@ -1,0 +1,13 @@
+.code-input-field{
+    width: 100%;
+    border-radius: 10px;
+    background-color: #031F67;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#exerciseInstruction{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-bottom: 10px;
+}

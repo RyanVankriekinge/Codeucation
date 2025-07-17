@@ -97,3 +97,6 @@ Use the following credentials to log in and test the application:
 
 17. **Mongoose CRUD Operations & MVC Architecture**  
     Followed [Mastering Backend Development with Node.js, MongoDB Integration, Mongoose CRUD Operations, and MVC Architecture](https://dev.to/imsushant12/mastering-backend-development-with-nodejs-mongodb-integration-mongoose-crud-operations-and-mvc-architecture-36k4)
+
+18. **Skulpt Python compiler**  
+    Followed [Skulpt documentation](https://skulpt.org/docs/index.html)

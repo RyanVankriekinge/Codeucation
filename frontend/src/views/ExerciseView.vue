@@ -3,7 +3,6 @@
     <div class="outer-wrapper">
       <div class="wrapper">
         <div class="section">
-            <div class="column66">
           <div class="column66">
             <h1>Oefening naam</h1>
             <h2>{{ title }}</h2>
@@ -110,4 +109,64 @@ onMounted(async () => {
     loadExercise(currentExerciseId.value)
   }
 })
+
+const loadScript = (src) => {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(`script[src="${src}"]`)) return resolve()
+    const script = document.createElement('script')
+    script.src = src
+    script.onload = resolve
+    script.onerror = reject
+    document.head.appendChild(script)
+  })
+}
+
+const ensureSkulptLoaded = async () => {
+  if (typeof window.Sk === 'undefined') {
+    await loadScript('https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.min.js')
+  }
+}
+
+const checkCode = async () => {
+  result.value = ''
+
+  if (!currentExercise.value) return
+
+  await ensureSkulptLoaded()
+
+  let capturedOutput = ''
+  Sk.configure({
+    output: (text) => (capturedOutput += text),
+    read: (x) => {
+      if (!Sk.builtinFiles || !Sk.builtinFiles['files'][x]) throw `File not found: '${x}'`
+      return Sk.builtinFiles['files'][x]
+    },
+  })
+
+  try {
+    const userCode = codeArea.value
+    const validationRes = await fetch(
+      `http://localhost:3000/api/exerciseValidationCode/${encodeURIComponent(currentExercise.value.testFile)}`
+    )
+
+    if (!validationRes.ok) {
+      const validationData = await validationRes.json()
+      throw new Error(validationData.message || 'Failed to fetch validation code')
+    }
+
+    const validationData = await validationRes.json()
+
+    const fullCode = userCode + '\n' + validationData.code
+    console.log(fullCode)
+
+    await Sk.misceval.asyncToPromise(() =>
+      Sk.importMainWithBody('<stdin>', false, fullCode)
+    )
+
+    result.value = capturedOutput
+  } catch (err) {
+    console.error('Skulpt error object:', err)
+    result.value = 'Error:\n' + err.toString()
+  }
+}
 </script>

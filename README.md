@@ -100,3 +100,12 @@ Use the following credentials to log in and test the application:
 
 18. **Skulpt Python compiler**  
     Followed [Skulpt documentation](https://skulpt.org/docs/index.html)
+
+19. **Dynamically loading script with promise**  
+    Followed [How to use promises until a JS library has loaded](https://stackoverflow.com/questions/73426866/how-to-use-promises-to-wait-until-a-javascript-library-has-loaded)
+
+20. **Dynamically loading external scripts (article)**  
+    Based on [Easily Load an External Script Using JavaScript – Aaron Smith](https://aaronsmith.online/articles/easily-load-an-external-script-using-javascript)
+
+21. **Skulpt npm package & CDN**  
+    Referenced [jsDelivr Skulpt package](https://www.jsdelivr.com/package/npm/skulpt)

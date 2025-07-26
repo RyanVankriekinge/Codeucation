@@ -109,3 +109,12 @@ Use the following credentials to log in and test the application:
 
 21. **Skulpt npm package & CDN**  
     Referenced [jsDelivr Skulpt package](https://www.jsdelivr.com/package/npm/skulpt)
+
+22. **CodeMirror editor**  
+    Used [CodeMirror official site](https://codemirror.net/) for integrating the code editor with syntax highlighting
+
+23. **Vue language support for CodeMirror**  
+    Referred to [codemirror/lang-vue GitHub repository](https://github.com/codemirror/lang-vue)
+
+24. **CodeMirror One Dark theme**  
+    Implemented [One Dark theme for CodeMirror](https://www.npmjs.com/package/@codemirror/theme-one-dark)

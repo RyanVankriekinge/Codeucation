@@ -24,12 +24,7 @@
 
             <div v-html="instruction"></div>
 
-            <textarea
-              v-model="codeArea"
-              class="code-input-field"
-              rows="10"
-              placeholder="# Write your code here..."
-            ></textarea><br>
+            <div ref="editorContainer" class="code-editor"></div><br>
 
             <button @click="checkCode" class="big-button">Code testen</button>
             <pre>{{ result }}</pre>
@@ -43,6 +38,11 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { EditorView, keymap } from '@codemirror/view'
+import { EditorState } from '@codemirror/state'
+import { python } from '@codemirror/lang-python'
+import { defaultKeymap, indentWithTab } from '@codemirror/commands'
+import { oneDark } from '@codemirror/theme-one-dark'
 
 const route = useRoute()
 const router = useRouter()
@@ -55,6 +55,9 @@ const title = ref('')
 const instruction = ref('')
 const codeArea = ref('')
 const result = ref('')
+
+const editorContainer = ref(null)
+let editorView = null
 
 const loadExercises = async () => {
   try {
@@ -80,6 +83,23 @@ const loadExercise = async (exerciseId) => {
     instruction.value = data.instruction || ''
     codeArea.value = data.starterCode || ''
     result.value = ''
+
+    if (editorView) {
+      const state = EditorState.create({
+        doc: codeArea.value,
+        extensions: [
+          python(),
+          oneDark,
+          keymap.of([indentWithTab, ...defaultKeymap]),
+          EditorView.updateListener.of(update => {
+            if (update.docChanged) {
+              codeArea.value = update.state.doc.toString()
+            }
+          })
+        ]
+      })
+      editorView.setState(state)
+    }
   } catch (err) {
     console.error('Failed to load exercise:', err)
     title.value = 'Error loading exercise'
@@ -108,6 +128,26 @@ onMounted(async () => {
   if (currentExerciseId.value) {
     loadExercise(currentExerciseId.value)
   }
+
+  if (editorContainer.value) {
+    const state = EditorState.create({
+      doc: codeArea.value,
+      extensions: [
+        python(),
+        oneDark,
+        keymap.of([indentWithTab, ...defaultKeymap]),
+        EditorView.updateListener.of(update => {
+          if (update.docChanged) {
+            codeArea.value = update.state.doc.toString()
+          }
+        })
+      ]
+    })
+    editorView = new EditorView({
+      state,
+      parent: editorContainer.value
+    })
+  }
 })
 
 const loadScript = (src) => {
@@ -123,6 +163,7 @@ const loadScript = (src) => {
 
 const ensureSkulptLoaded = async () => {
   if (typeof window.Sk === 'undefined') {
+    await loadScript('https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js')
     await loadScript('https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.min.js')
   }
 }
@@ -165,8 +206,12 @@ const checkCode = async () => {
 
     result.value = capturedOutput
   } catch (err) {
-    console.error('Skulpt error object:', err)
-    result.value = 'Error:\n' + err.toString()
+    console.error('Skulpt error:', err)
+    if (err && err.traceback) {
+      result.value = 'Skulpt Traceback:\n' + err.traceback.toString()
+    } else {
+      result.value = 'Error:\n' + err.toString()
+    }
   }
 }
 </script>

@@ -8,21 +8,23 @@
             <h2>{{ title }}</h2>
 
             <label class="paragraph" for="exerciseSelect">Huidige oefening: </label>
-            <select class="paragraph"  style="margin-bottom: 20px;"
-              id="exerciseSelect"
-              v-if="exercises.length"
-              v-model="currentExerciseId"
-            >
-              <option class="paragraph"
-                v-for="exercise in exercises"
-                :key="exercise._id"
-                :value="exercise._id"
-              >
-                {{ exercise.title }}
-              </option>
-            </select>
-
-            <div class="paragraph"  style="margin-bottom: 15px;" v-html="instruction"></div>
+            <div class="custom-select">
+              <select v-model="currentExerciseId" id="exerciseSelect" class="paragraph" @focus="isOpen = true"
+                @blur="isOpen = false">
+                <option v-for="exercise in exercises" :key="exercise._id" :value="exercise._id">
+                  {{ exercise.title }}
+                </option>
+              </select>
+              <svg v-if="!isOpen" xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 44.047 23.523">
+                <path d="M6,13.5,25.9,33.4,45.8,13.5" transform="translate(-3.879 -11.379)" fill="none" stroke="#FFFFFF"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+              </svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 44.047 23.523">
+                <path d="M6,33.4,25.9,13.5,45.8,33.4" transform="translate(-3.879 -12)" fill="none" stroke="#FFFFFF"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+              </svg>
+            </div>
+            <div class="paragraph" style="margin-bottom: 15px;" v-html="instruction"></div>
 
             <div ref="editorContainer" class="code-editor"></div><br>
 
@@ -58,6 +60,8 @@ const result = ref('')
 
 const editorContainer = ref(null)
 let editorView = null
+
+const isOpen = ref(false)
 
 const loadExercises = async () => {
   try {
@@ -226,15 +230,3 @@ const checkCode = async () => {
   }
 }
 </script>
-<style>
-.paragraph{
-  font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-}
-select{
-  background-color: #031F67;
-  color: white;
-  padding: 8px;
-  border-radius: 10px;
-}
-
-</style>

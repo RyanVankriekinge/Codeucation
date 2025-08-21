@@ -43,6 +43,60 @@ Use the following credentials to log in and test the application:
 - Student accounts follow the pattern leerling[number]@test.be (e.g., leerling2@test.be, leerling3@test.be), all with the password test123.
 - These credentials are for testing purposes only.
 
+## Test exercises
+Use the following solutions for the exercises to try the code testing system:
+
+### Hello World!
+```
+def main():
+    return 'Hello, world!'
+```
+
+#### Test an almost right function
+```
+def main():
+    return 'Hello, world'
+```
+
+### Fibonacci
+```
+def fibonacci(n):
+    result = []
+    a, b = 0, 1
+    for _ in range(n):
+        result.append(a)
+        a, b = b, a + b
+    return result 
+```
+
+#### Fibonacci recursive
+```
+def fib(n):
+    if n <= 1:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+def fibonacci(n):
+    return [fib(i) for i in range(n)]
+```
+
+### Priemgetallen
+```
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+```
 ## References
 
 1. **Creating .gitignore file**  

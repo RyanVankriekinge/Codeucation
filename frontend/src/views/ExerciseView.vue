@@ -4,16 +4,16 @@
       <div class="wrapper">
         <div class="section">
           <div class="column66">
-            <h1>Oefening naam</h1>
+            <h1>{{ title }}</h1>
             <h2>{{ title }}</h2>
 
-            <label for="exerciseSelect">Huidige oefening: </label>
-            <select
+            <label class="paragraph" for="exerciseSelect">Huidige oefening: </label>
+            <select class="paragraph"  style="margin-bottom: 20px;"
               id="exerciseSelect"
               v-if="exercises.length"
               v-model="currentExerciseId"
             >
-              <option
+              <option class="paragraph"
                 v-for="exercise in exercises"
                 :key="exercise._id"
                 :value="exercise._id"
@@ -22,7 +22,7 @@
               </option>
             </select>
 
-            <div v-html="instruction"></div>
+            <div class="paragraph"  style="margin-bottom: 15px;" v-html="instruction"></div>
 
             <div ref="editorContainer" class="code-editor"></div><br>
 
@@ -102,7 +102,7 @@ const loadExercise = async (exerciseId) => {
     }
   } catch (err) {
     console.error('Failed to load exercise:', err)
-    title.value = 'Error loading exercise'
+    title.value = 'Geen oefening geselecteerd'
     instruction.value = ''
     codeArea.value = ''
     result.value = ''
@@ -207,11 +207,34 @@ const checkCode = async () => {
     result.value = capturedOutput
   } catch (err) {
     console.error('Skulpt error:', err)
-    if (err && err.traceback) {
-      result.value = 'Skulpt Traceback:\n' + err.traceback.toString()
+
+    if (err instanceof Sk.builtin.SyntaxError) {
+      result.value = "SyntaxError: " + Sk.ffi.remapToJs(err.args.v[0]) + ` on line ${err.traceback[0].lineno}`;
+    } else if (err instanceof Sk.builtin.ValueError || err instanceof Sk.builtin.TypeError) {
+      result.value = err.tp$name + ": " + Sk.ffi.remapToJs(err.args.v[0]) + ` on line ${err.traceback[0].lineno}`;
     } else {
-      result.value = 'Error:\n' + err.toString()
+      result.value = err.toString();
     }
+
+    // if (err && err.traceback) {
+    //   for (const tb of err.traceback) {
+    //     result.value += `line ${tb.lineno}\n`;
+    //   }
+    // } else {
+    //   result.value = 'Error:\n' + err.toString()
+    // }
   }
 }
 </script>
+<style>
+.paragraph{
+  font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+}
+select{
+  background-color: #031F67;
+  color: white;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+</style>

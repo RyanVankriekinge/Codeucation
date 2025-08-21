@@ -5,7 +5,7 @@
         <div class="section">
           <div class="column66">
             <h1>{{ title }}</h1>
-            <h2>{{ title }}</h2>
+            <h2>{{ course?.title }}: {{ chapter?.title }}</h2>
 
             <label class="paragraph" for="exerciseSelect">Huidige oefening: </label>
             <div class="custom-select">
@@ -49,6 +49,8 @@ import { oneDark } from '@codemirror/theme-one-dark'
 const route = useRoute()
 const router = useRouter()
 
+const course = ref(null)
+const chapter = ref(null)
 const exercises = ref([])
 const currentExerciseId = ref(route.params.exerciseId)
 const currentExercise = ref(null)
@@ -62,6 +64,26 @@ const editorContainer = ref(null)
 let editorView = null
 
 const isOpen = ref(false)
+
+const loadChapter = async () => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/chapters/${route.params.chapterId}`)
+    if (!res.ok) throw new Error('Failed to load chapter')
+    chapter.value = await res.json()
+  } catch (err) {
+    console.error('Failed to load chapter:', err)
+  }
+}
+
+const loadCourse = async () => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/courses/${route.params.courseId}`)
+    if (!res.ok) throw new Error('Failed to load course')
+    course.value = await res.json()
+  } catch (err) {
+    console.error('Failed to load course:', err)
+  }
+}
 
 const loadExercises = async () => {
   try {
@@ -129,6 +151,8 @@ watch(currentExerciseId, (newId) => {
 
 onMounted(async () => {
   await loadExercises()
+  await loadChapter()
+  await loadCourse()
   if (currentExerciseId.value) {
     loadExercise(currentExerciseId.value)
   }

@@ -118,3 +118,6 @@ Use the following credentials to log in and test the application:
 
 24. **CodeMirror One Dark theme**  
     Implemented [One Dark theme for CodeMirror](https://www.npmjs.com/package/@codemirror/theme-one-dark)
+
+25. **Apply padding to arrow in select item**  
+    Used [StackOverflow - Padding doesn't apply to select html tag dropdown arrow](https://stackoverflow.com/questions/70162260/padding-doesnt-apply-to-select-html-tag-dropdown-arrow) apply padding to the selection arrow.

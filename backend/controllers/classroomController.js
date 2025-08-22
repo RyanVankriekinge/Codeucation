@@ -77,11 +77,15 @@ exports.getClassroomById = async (req, res) => {
         const courseIds = classroomCourses.map(cc => cc.courseId);
         const courses = await Course.find({ _id: { $in: courseIds } });
 
-        const formattedCourses = courses.map(course => ({
-            _id: course._id,
-            title: course.title,
-            hidden: course.hidden || false
+        const formattedCourses = await Promise.all(classroomCourses.map(async (cc) => {
+            const course = await Course.findById(cc.courseId);
+            return {
+                _id: cc.courseId,
+                title: course ? course.title : "Unknown Course",
+                hidden: cc.hidden || false,
+            };
         }));
+
 
         const responseClassroom = {
             _id: classroom._id,

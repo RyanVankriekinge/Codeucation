@@ -47,3 +47,22 @@ exports.getChaptersByCourse = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+
+exports.getChapterById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ success: false, message: 'Invalid chapter ID' });
+        }
+
+        const chapter = await Chapter.findById(id);
+        if (!chapter) {
+            return res.status(404).json({ success: false, message: 'Chapter not found' });
+        }
+
+        res.json(chapter);
+    } catch (error) {
+        console.error('Error getting chapter by ID:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};

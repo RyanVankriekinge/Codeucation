@@ -43,6 +43,60 @@ Use the following credentials to log in and test the application:
 - Student accounts follow the pattern leerling[number]@test.be (e.g., leerling2@test.be, leerling3@test.be), all with the password test123.
 - These credentials are for testing purposes only.
 
+## Test exercises
+Use the following solutions for the exercises to try the code testing system:
+
+### Hello World!
+```
+def main():
+    return 'Hello, world!'
+```
+
+#### Test an almost right function
+```
+def main():
+    return 'Hello, world'
+```
+
+### Fibonacci
+```
+def fibonacci(n):
+    result = []
+    a, b = 0, 1
+    for _ in range(n):
+        result.append(a)
+        a, b = b, a + b
+    return result 
+```
+
+#### Fibonacci recursive
+```
+def fib(n):
+    if n <= 1:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+def fibonacci(n):
+    return [fib(i) for i in range(n)]
+```
+
+### Priemgetallen
+```
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+```
 ## References
 
 1. **Creating .gitignore file**  
@@ -104,3 +158,27 @@ Use the following credentials to log in and test the application:
     - Fixed backend to correctly return visibility status stored in MongoDB.
 19. **Stop click event when clicking eye icon**  
     Used [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation) to avoid router direction to course page when clicking the eye icon that hides or shows the course for students.
+20. **Skulpt Python compiler**  
+    Followed [Skulpt documentation](https://skulpt.org/docs/index.html)
+
+21. **Dynamically loading script with promise**  
+    Followed [How to use promises until a JS library has loaded](https://stackoverflow.com/questions/73426866/how-to-use-promises-to-wait-until-a-javascript-library-has-loaded)
+
+22. **Dynamically loading external scripts (article)**  
+    Based on [Easily Load an External Script Using JavaScript – Aaron Smith](https://aaronsmith.online/articles/easily-load-an-external-script-using-javascript)
+
+23. **Skulpt npm package & CDN**  
+    Referenced [jsDelivr Skulpt package](https://www.jsdelivr.com/package/npm/skulpt)
+
+24. **CodeMirror editor**  
+    Used [CodeMirror official site](https://codemirror.net/) for integrating the code editor with syntax highlighting
+
+25. **Vue language support for CodeMirror**  
+    Referred to [codemirror/lang-vue GitHub repository](https://github.com/codemirror/lang-vue)
+
+26. **CodeMirror One Dark theme**  
+    Implemented [One Dark theme for CodeMirror](https://www.npmjs.com/package/@codemirror/theme-one-dark)
+
+27. **Apply padding to arrow in select item**  
+    Used [StackOverflow - Padding doesn't apply to select html tag dropdown arrow](https://stackoverflow.com/questions/70162260/padding-doesnt-apply-to-select-html-tag-dropdown-arrow) apply padding to the selection arrow.
+

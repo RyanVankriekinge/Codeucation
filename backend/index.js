@@ -12,6 +12,8 @@ const courseRoutes = require('./routes/courseRoutes');
 const chapterRoutes = require('./routes/chapterRoutes');
 const classroomCourseRoutes = require('./routes/classroomCourseRoutes');
 const exerciseRoutes = require('./routes/exerciseRoutes');
+const exerciseValidationCodeRoutes = require('./routes/exerciseValidationCodeRoutes');
+
 
 const app = express();
 const port = 3000;
@@ -44,6 +46,8 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/chapters', chapterRoutes);
 app.use('/api/classroom-courses', classroomCourseRoutes);
 app.use('/api/exercises', exerciseRoutes);
+app.use('/api/exerciseValidationCode', exerciseValidationCodeRoutes);
+
 
 // Connect to MongoDB and start server
 connectToDB().then(() => {

@@ -13,7 +13,7 @@
               <router-link 
                 v-for="course in classroom?.courses" 
                 :key="course._id" 
-                :to="`/course/${course._id}`" 
+                :to="`/courses/${course._id}`" 
                 class="cursus-link"
               >
                 <div class="cursus-container">

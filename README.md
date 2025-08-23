@@ -1,5 +1,6 @@
 # Codeucation
 ## Description
+Codeucation is a digital platform that supports secondary school teachers in teaching Python programming. It provides a learning environment where students complete coding exercises, while teachers can track progress and manage classes without needing advanced programming skills. Teachers can also follow the courses themselves, enabling them to fully master the material before teaching it. The platform integrates an automatic code testing system, offering instant feedback. With its user-friendly interface and practical tools, Codeucation strengthens both teaching and learning in computer science education.
 ## Set-up guide
 ### Requirements
 Make sure you have the following installed: <br>
@@ -37,10 +38,8 @@ Use the following credentials to log in and test the application:
 | Role    | Email                                         | Password |
 | ------- | --------------------------------------------- | -------- |
 | Teacher | leraar1@test.be | test123  |
-| Student | leerling1@test.be | test123  |
 
 ### Note
-- Student accounts follow the pattern leerling[number]@test.be (e.g., leerling2@test.be, leerling3@test.be), all with the password test123.
 - These credentials are for testing purposes only.
 
 ## Test exercises

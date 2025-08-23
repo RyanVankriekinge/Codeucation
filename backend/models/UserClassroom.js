@@ -1,10 +1,9 @@
-const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
 
-function createUserClassroom(userId, classroomId) {
-    return {
-        userId: new ObjectId(userId),
-        classroomId: new ObjectId(classroomId)
-    };
-}
+const userClassroomSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    classroomId: { type: mongoose.Schema.Types.ObjectId, ref: 'Classroom', required: true }
+});
 
-module.exports = { createUserClassroom };
+const UserClassroom = mongoose.model('UserClassroom', userClassroomSchema);
+module.exports = UserClassroom;

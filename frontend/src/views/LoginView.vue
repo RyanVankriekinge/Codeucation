@@ -59,7 +59,7 @@
         const result = await response.json();
 
         if (result.success) {
-        router.push('/');
+        router.push('/dashboard');
         } else {
         errorMessage.value = result.message || 'Er is iets misgegaan.';
         }

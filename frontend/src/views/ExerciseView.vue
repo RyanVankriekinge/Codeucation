@@ -225,9 +225,9 @@ const checkCode = async () => {
     }
 
     const validationData = await validationRes.json()
-
     const fullCode = userCode + '\n' + validationData.code
     console.log(fullCode)
+
     await Sk.misceval.asyncToPromise(() =>
       Sk.importMainWithBody('<stdin>', false, fullCode)
     );
@@ -240,6 +240,17 @@ const checkCode = async () => {
     }
     console.log(feedback.status);
     result.value = feedback.message;
+    await fetch('http://localhost:3000/api/exerciseProgress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({
+        exerciseId: currentExercise.value._id,
+        status: feedback.status,
+        lastOutput: feedback.output
+      })
+    })
+
   } catch (err) {
     console.error('Skulpt error:', err)
 
@@ -260,4 +271,5 @@ const checkCode = async () => {
     // }
   }
 }
+
 </script>

@@ -29,7 +29,8 @@
             <div ref="editorContainer" class="code-editor"></div><br>
 
             <button @click="checkCode" class="big-button">Code testen</button>
-            <pre style="font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;">{{ result }}</pre>
+            <pre
+              style="font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;">{{ result }}</pre>
           </div>
         </div>
       </div>
@@ -224,15 +225,32 @@ const checkCode = async () => {
     }
 
     const validationData = await validationRes.json()
-
     const fullCode = userCode + '\n' + validationData.code
     console.log(fullCode)
 
     await Sk.misceval.asyncToPromise(() =>
       Sk.importMainWithBody('<stdin>', false, fullCode)
-    )
+    );
 
-    result.value = capturedOutput
+    let feedback;
+    try {
+      feedback = JSON.parse(capturedOutput.trim());
+    } catch (e) {
+      console.log("Validation function does not return valid JSON");
+    }
+    console.log(feedback.status);
+    result.value = feedback.message;
+    await fetch('http://localhost:3000/api/exerciseProgress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({
+        exerciseId: currentExercise.value._id,
+        status: feedback.status,
+        lastOutput: feedback.output
+      })
+    })
+
   } catch (err) {
     console.error('Skulpt error:', err)
 
@@ -253,4 +271,5 @@ const checkCode = async () => {
     // }
   }
 }
+
 </script>

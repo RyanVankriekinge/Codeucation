@@ -232,7 +232,14 @@ const checkCode = async () => {
       Sk.importMainWithBody('<stdin>', false, fullCode)
     )
 
-    result.value = capturedOutput
+    let feedback;
+    try {
+      feedback = JSON.parse(capturedOutput.trim());
+    } catch (e) {
+      console.log("Validation function does not return valid JSON");
+    }
+    console.log(feedback.status);
+    result.value = feedback.message;
   } catch (err) {
     console.error('Skulpt error:', err)
 

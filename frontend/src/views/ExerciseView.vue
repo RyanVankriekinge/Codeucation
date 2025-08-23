@@ -29,7 +29,8 @@
             <div ref="editorContainer" class="code-editor"></div><br>
 
             <button @click="checkCode" class="big-button">Code testen</button>
-            <pre style="font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;">{{ result }}</pre>
+            <pre
+              style="font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;">{{ result }}</pre>
           </div>
         </div>
       </div>
@@ -227,10 +228,9 @@ const checkCode = async () => {
 
     const fullCode = userCode + '\n' + validationData.code
     console.log(fullCode)
-
     await Sk.misceval.asyncToPromise(() =>
       Sk.importMainWithBody('<stdin>', false, fullCode)
-    )
+    );
 
     let feedback;
     try {

@@ -202,10 +202,3 @@ p{
 .indented{
   text-indent: 2em;
 }
-
-.chapter-theory{
-  margin-bottom: 50px;
-  padding: 20px;
-  border: 2px solid grey;
-  border-radius: 0px 30px 30px 30px;
-}

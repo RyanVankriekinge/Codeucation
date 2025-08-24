@@ -173,7 +173,7 @@ function goToExercise(exerciseId) {
 .exercise-status {
   padding: 10px;
   background-color: #031F67;
-  width: 100px;
+  width: 120px;
   text-align: center;
   color: white;
   border-radius: 7px;
@@ -195,6 +195,6 @@ function goToExercise(exerciseId) {
 .exercise-right-side{
   display: flex;
   justify-content: space-between;
-  width: 400px;
+  width: 450px;
 }
 </style>

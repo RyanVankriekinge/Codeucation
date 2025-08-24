@@ -4,6 +4,7 @@ const ClassroomCourse = require('../models/ClassroomCourse');
 const Classroom = require('../models/Classroom');
 const Chapter = require('../models/Chapter');
 const UserClassroom = require('../models/UserClassroom');
+const Exercise = require('../models/Exercise');
 
 exports.createCourse = async (req, res) => {
     try {
@@ -51,6 +52,11 @@ exports.getCourseById = async (req, res) => {
 
         const chapters = await Chapter.find({ courseId: id }).lean();
 
+        for (const chapter of chapters) {
+            const exercises = await Exercise.find({ chapterId: chapter._id }).lean();
+            chapter.exercises = exercises;
+        }
+
         const classroomCourses = await ClassroomCourse.find({ courseId: id }).lean();
         const classroomIds = classroomCourses.map(cc => cc.classroomId);
 
@@ -69,6 +75,7 @@ exports.getCourseById = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+
 
 exports.getCourseByIdForUser = async (req, res) => {
     try {

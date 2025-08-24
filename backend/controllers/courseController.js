@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Course = require('../models/Course');
+const ClassroomCourse = require('../models/ClassroomCourse');
+const Classroom = require('../models/Classroom');
+const Chapter = require('../models/Chapter');
 
 exports.createCourse = async (req, res) => {
     try {
@@ -40,12 +43,26 @@ exports.getCourseById = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Invalid course ID' });
         }
 
-        const course = await Course.findById(id);
+        const course = await Course.findById(id).lean();
         if (!course) {
             return res.status(404).json({ success: false, message: 'Course not found' });
         }
 
-        res.json(course);
+        const chapters = await Chapter.find({ courseId: id }).lean();
+
+        const classroomCourses = await ClassroomCourse.find({ courseId: id }).lean();
+        const classroomIds = classroomCourses.map(cc => cc.classroomId);
+
+        const classrooms = await Classroom.find({ _id: { $in: classroomIds } })
+            .populate('schoolId')
+            .lean();
+
+        res.json({
+            ...course,
+            chapters,
+            classrooms
+        });
+
     } catch (error) {
         console.error('Error getting course by ID:', error);
         res.status(500).json({ success: false, message: 'Server error' });

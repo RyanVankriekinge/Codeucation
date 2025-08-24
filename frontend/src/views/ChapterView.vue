@@ -42,7 +42,7 @@
                 >
                   <h3 class="exercise-title">{{ exercise.title }}</h3>
                   <div class="exercise-right-side">
-                    <p class="exercise-status">{{ exercise.status || 'Niet gestart' }}</p>
+                    <p class="exercise-status">{{ exercise.status || 'Niet gemaakt' }}</p>
                     <div class="naar-oefening">
                       <p>Naar oefening</p>
                       <svg xmlns="http://www.w3.org/2000/svg" width="9" height="17" viewBox="0 0 18.621 34.243">

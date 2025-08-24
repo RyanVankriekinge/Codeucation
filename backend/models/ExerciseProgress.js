@@ -5,8 +5,8 @@ const exerciseProgressSchema = new mongoose.Schema({
     exerciseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Exercise', required: true },
     status: {
         type: String,
-        enum: ['false', 'partial', 'true'],
-        default: 'false'
+        enum: ['Niet gemaakt', 'Gedeeltelijk juist', 'Klaar'],
+        default: 'Niet gemaakt'
     },
     attempts: { type: Number, default: 0 },
     lastOutput: { type: String }

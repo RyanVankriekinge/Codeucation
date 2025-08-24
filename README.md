@@ -189,3 +189,6 @@ def is_prime(n):
 
 30. **Using Mongoose**  
     Used [Mongoose doucmentation](https://mongoosejs.com/docs/) to use the mongoose library.
+
+31. **Using LocalStorage in Vue**  
+    Used [Vue.js - Client-Side Storage](https://v2.vuejs.org/v2/cookbook/client-side-storage.html?redirect=true) to save value of isActive for tabs on chapter page.

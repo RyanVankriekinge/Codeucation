@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Chapter = require('../models/Chapter');
+const Course = require('../models/Course');
+const Exercise = require('../models/Exercise');
+
 
 exports.createChapter = async (req, res) => {
     try {
@@ -55,14 +58,24 @@ exports.getChapterById = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Invalid chapter ID' });
         }
 
-        const chapter = await Chapter.findById(id);
+        const chapter = await Chapter.findById(id).lean();
         if (!chapter) {
             return res.status(404).json({ success: false, message: 'Chapter not found' });
         }
 
-        res.json(chapter);
+        const course = await Course.findById(chapter.courseId).lean();
+        if (course) {
+            chapter.courseTitle = course.title;
+        }
+
+        const exercises = await Exercise.find({ chapterId: id }).lean();
+        chapter.exercises = exercises;
+
+        res.json({ chapter });
     } catch (error) {
         console.error('Error getting chapter by ID:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+
+

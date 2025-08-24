@@ -26,9 +26,9 @@
             <div v-if="activeTab === 'leerpad'" class="chapter-box theorie-box">
               <div v-html="chapter?.theory"></div>
 
-              <router-link :to="`/course/chapter/${chapterId}/exercises`">
-                <button class="big-button">Naar de oefeningen</button>
-              </router-link>
+              <button class="big-button" @click="activeTab = 'oefeningen'">
+                Naar de oefeningen
+              </button>
             </div>
             <div v-else class="chapter-box oefeningen-box">
               <h3 style="margin-top: 10px !important;">Oefeningen</h3>

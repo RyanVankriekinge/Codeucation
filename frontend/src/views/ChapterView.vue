@@ -61,9 +61,8 @@
     </div>
   </main>
 </template>
-
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 
@@ -71,6 +70,16 @@ const route = useRoute()
 const router = useRouter()
 const chapterId = route.params.chapterId
 const activeTab = ref('leerpad')
+
+onMounted(() => {
+  const savedTab = localStorage.getItem(`chapter-${chapterId}-activeTab`)
+  if (savedTab) activeTab.value = savedTab
+})
+
+watch(activeTab, (newVal) => {
+  localStorage.setItem(`chapter-${chapterId}-activeTab`, newVal)
+})
+
 const chapter = ref(null)
 
 onMounted(async () => {
@@ -86,6 +95,7 @@ function goToExercise(exerciseId) {
   router.push(`/course/chapter/${chapterId}/exercise/${exerciseId}`)
 }
 </script>
+
 <style scoped>
 .tab-menu {
   display: flex;

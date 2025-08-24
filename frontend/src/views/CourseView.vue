@@ -43,7 +43,7 @@
             <router-link
               v-for="chapter in course?.chapters || []"
               :key="chapter._id"
-              :to="`/course/${courseId}/chapter/${chapter._id}`"
+              :to="`/courses/${courseId}/chapters/${chapter._id}`"
               class="column33-listing"
             >
               {{ chapter.title }}

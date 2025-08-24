@@ -2,23 +2,27 @@
   <main>
     <div class="outer-wrapper">
       <div class="wrapper">
-        <div class="section">
+        <div class="section" style="margin-bottom: 100px;">
           <div class="column66">
-            <h1>Python voor beginners</h1>
+            <h1>{{ course.title }}</h1>
             <h2>Aangeboden door Codeucation</h2>
             <h3>Eigen voortgang in deze cursus</h3>
-            <progress class="course-progress large" max="100" :value="70"></progress>
+            <progress class="course-progress large" max="100" :value="course.progress"></progress>
+
             <h3>Huidig hoofdstuk</h3>
-            <div class="chapters-container">
-              <router-link to="/course/chapter" class="chapter-link">
+            <div class="chapters-container" v-if="currentChapter">
+              <router-link :to="`/course/chapter/${currentChapter._id}`" class="chapter-link">
                 <div class="chapter-container">
-                  <h4 class="chapter-title">Variabelen</h4>
+                  <h4 class="chapter-title">{{ currentChapter.title }}</h4>
                   <div class="chapter-info">
-                    <progress class="course-progress" max="100" :value="70"></progress>
+                    <progress class="course-progress" max="100" :value="currentChapter.progress"></progress>
                     <div class="button-continue">
                       <p>Verdergaan</p>
                       <svg xmlns="http://www.w3.org/2000/svg" width="11.739" height="20.478" viewBox="0 0 11.739 20.478">
-                        <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right" d="M12,6l8.118,8.118L12,22.235" transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                        <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right"
+                          d="M12,6l8.118,8.118L12,22.235"
+                          transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round"
+                          stroke-linejoin="round" stroke-width="3" />
                       </svg>
                     </div>
                   </div>
@@ -27,82 +31,34 @@
             </div>
 
             <h3>Hoofdstuk kiezen</h3>
-            <router-link to="/course/chapter" class="chapter-link">
-              <div class="chapter-container">
-                <h4 class="chapter-title">Variabelen</h4>
-                <div class="chapter-info">
-                  <progress class="course-progress" max="100" :value="50"></progress>
-                  <div class="button-continue">
-                    <p>Verdergaan</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="11.739" height="20.478" viewBox="0 0 11.739 20.478">
-                      <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right" d="M12,6l8.118,8.118L12,22.235" transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                    </svg>
+            <div class="chapters-container">
+              <router-link v-for="chapter in chapters" :key="chapter._id" :to="`/course/chapter/${chapter._id}`"
+                class="chapter-link">
+                <div class="chapter-container">
+                  <h4 class="chapter-title">{{ chapter.title }}</h4>
+                  <div class="chapter-info">
+                    <progress class="course-progress" max="100" :value="chapter.progress"></progress>
+                    <div class="button-continue">
+                      <p>Verdergaan</p>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="11.739" height="20.478" viewBox="0 0 11.739 20.478">
+                        <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right"
+                          d="M12,6l8.118,8.118L12,22.235"
+                          transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round"
+                          stroke-linejoin="round" stroke-width="3" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </router-link>
-                        <router-link to="/course/chapter" class="chapter-link">
-              <div class="chapter-container">
-                <h4 class="chapter-title">Variabelen</h4>
-                <div class="chapter-info">
-                  <progress class="course-progress" max="100" :value="50"></progress>
-                  <div class="button-continue">
-                    <p>Verdergaan</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="11.739" height="20.478" viewBox="0 0 11.739 20.478">
-                      <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right" d="M12,6l8.118,8.118L12,22.235" transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </router-link>
-                        <router-link to="/course/chapter" class="chapter-link">
-              <div class="chapter-container">
-                <h4 class="chapter-title">Variabelen</h4>
-                <div class="chapter-info">
-                  <progress class="course-progress" max="100" :value="50"></progress>
-                  <div class="button-continue">
-                    <p>Verdergaan</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="11.739" height="20.478" viewBox="0 0 11.739 20.478">
-                      <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right" d="M12,6l8.118,8.118L12,22.235" transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </router-link>
-                        <router-link to="/course/chapter" class="chapter-link">
-              <div class="chapter-container">
-                <h4 class="chapter-title">Variabelen</h4>
-                <div class="chapter-info">
-                  <progress class="course-progress" max="100" :value="50"></progress>
-                  <div class="button-continue">
-                    <p>Verdergaan</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="11.739" height="20.478" viewBox="0 0 11.739 20.478">
-                      <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right" d="M12,6l8.118,8.118L12,22.235" transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </router-link>
-                        <router-link to="/course/chapter" class="chapter-link">
-              <div class="chapter-container">
-                <h4 class="chapter-title">Variabelen</h4>
-                <div class="chapter-info">
-                  <progress class="course-progress" max="100" :value="50"></progress>
-                  <div class="button-continue">
-                    <p>Verdergaan</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="11.739" height="20.478" viewBox="0 0 11.739 20.478">
-                      <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right" d="M12,6l8.118,8.118L12,22.235" transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </router-link>
+              </router-link>
+            </div>
           </div>
 
           <div class="column33 blue">
-            <p class="column33-title">Afgewerkte oefeningen</p>
-            <router-link v-for="n in 23" :key="n" to="/course/chapter" class="column33-listing">
-              Naam oefening {{ n }}
+            <p class="column33-title">Oefeningen</p>
+            <router-link v-for="exercise in exercises" :key="exercise._id" 
+              :to="`/courses/${course._id}/chapters/${exercise.chapterId}/exercises/${exercise._id}`"
+              class="column33-listing">
+              {{ exercise.title }}
             </router-link>
           </div>
         </div>
@@ -110,10 +66,51 @@
     </div>
   </main>
 </template>
+
 <script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const course = ref({})
+const chapters = ref([])
+const currentChapter = ref(null)
+const exercises = ref([])
+const courseId = route.params.courseId;
+
+onMounted(async () => {
+  try {
+    const { data: courseData } = await axios.get(`http://localhost:3000/api/courses/${courseId}`);
+    course.value = courseData;
+    chapters.value = courseData.chapters || [];
+    currentChapter.value = chapters.value[0] || null;
+    exercises.value = [];
+    for (const ch of chapters.value) {
+      if (ch._id) {
+        const { data: exData } = await axios.get(`http://localhost:3000/api/exercises/chapter/${ch._id}`);
+        exercises.value.push(...exData.map(ex => ({
+          _id: ex._id,
+          title: ex.title,
+          chapterId: ex.chapterId
+        })));
+      }
+    }
+    console.log('exercises:', exercises.value);
+  } catch (error) {
+    console.error('Error fetching course data:', error);
+  }
+});
+
+
 
 </script>
+
 <style scoped>
+.chapters-container{
+    margin-bottom: 50px;
+}
 .chapter-container {
     display: flex;
     flex-wrap: wrap;

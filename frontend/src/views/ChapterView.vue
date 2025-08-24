@@ -92,7 +92,7 @@ onMounted(async () => {
 })
 
 function goToExercise(exerciseId) {
-  router.push(`/course/chapter/${chapterId}/exercise/${exerciseId}`)
+  router.push(`/courses/${chapter.value.courseId}/chapters/${chapterId}/exercises/${exerciseId}`)
 }
 </script>
 

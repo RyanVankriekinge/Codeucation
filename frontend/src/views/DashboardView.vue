@@ -5,25 +5,15 @@
         <div class="section">
           <div class="column66">
             <div class="klassen-container">
-              <router-link class="klas-container" to="/classroom">
-                <p class="klas-naam">5A Wetenschappen</p>
-                <p class="klas-school">Atheneum</p>
-                <p class="klas-aantal">25 leerlingen</p>
-              </router-link>
-              <router-link class="klas-container" to="/classroom">
-                <p class="klas-naam">5A Wetenschappen</p>
-                <p class="klas-school">Atheneum</p>
-                <p class="klas-aantal">25 leerlingen</p>
-              </router-link>
-              <router-link class="klas-container" to="/classroom">
-                <p class="klas-naam">5A Wetenschappen</p>
-                <p class="klas-school">Atheneum</p>
-                <p class="klas-aantal">25 leerlingen</p>
-              </router-link>
-              <router-link class="klas-container" to="/classroom">
-                <p class="klas-naam">5A Wetenschappen</p>
-                <p class="klas-school">Atheneum</p>
-                <p class="klas-aantal">25 leerlingen</p>
+              <router-link 
+                v-for="classroom in classrooms" 
+                :key="classroom._id" 
+                class="klas-container" 
+                :to="`/classroom/${classroom._id}`"
+              >
+                <p class="klas-naam">{{ classroom.name }}</p>
+                <p class="klas-school">{{ classroom.schoolName }}</p>
+                <p class="klas-aantal">{{ classroom.studentCount }} leerlingen</p>
               </router-link>
             </div>
           </div>
@@ -35,8 +25,51 @@
 </template>
 
 <script setup>
-  import Profile from '../components/Profile.vue';
+import { ref, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import Profile from '../components/Profile.vue';
+import axios from 'axios';
+
+const route = useRoute();
+const user = ref(null);
+const classrooms = ref([]);
+
+async function checkLogin() {
+  try {
+    const response = await fetch('http://localhost:3000/api/users/check-login', { credentials: 'include' });
+    const result = await response.json();
+    console.log('Check-login response:', result);
+    if (result.success) {
+      user.value = result;
+      fetchClassrooms(result.userId);
+    } else {
+      user.value = null;
+    }
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+  }
+}
+
+async function fetchClassrooms(userId) {
+  try {
+    const response = await axios.get(`http://localhost:3000/api/classroom-users/user/${userId}`);
+    classrooms.value = response.data;
+  } catch (error) {
+    console.error("Error fetching classrooms:", error);
+  }
+}
+
+onMounted(checkLogin);
+
+watch(
+  () => route.fullPath,
+  () => {
+    checkLogin();
+  }
+);
 </script>
+
+
 <style scoped>
 .klassen-container{
   width: 100%;

@@ -1,0 +1,43 @@
+.paragraph {
+  font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+}
+
+select {
+  background-color: #031F67;
+  color: white;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+}
+
+option{
+    background-color: #031F67;
+}
+
+.custom-select {
+  background-color: #031F67;
+  position: relative;
+  display: inline-block;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  margin-top: 7px;
+}
+
+.custom-select select {
+  width: 100%;
+  padding-right: 2rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+}
+
+.custom-select svg {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

@@ -9,7 +9,8 @@ import Classroom from '../views/ClassroomView.vue';
 import Course from '../views/CourseView.vue';
 import CourseOverview from '../views/CourseOverviewView.vue';
 import Chapter from '../views/ChapterView.vue';
-import Exercise from '../views/ChapterExercisesView.vue';
+import ChapterExercises from '../views/ChapterExercisesView.vue';
+import Exercise from '../views/ExerciseView.vue';
 
 const routes = [
   { path: '/', name: 'home', component: Home },
@@ -17,31 +18,12 @@ const routes = [
   { path: '/register', name: 'register', component: Register },
   { path: '/dashboard', name: 'dashboard', component: Dashboard },
   { path: '/profile', name: 'profile', component: Profile },
-  { path: '/classroom', name: 'classroom', component: Classroom },
-  {
-    path: '/courses/:courseId',
-    name: 'course',
-    component: Course,
-    children: [
-      {
-        path: '',
-        name: 'course-overview',
-        component: CourseOverview,
-      },
-      {
-        path: 'chapters/:chapterId',
-        name: 'chapter',
-        component: Chapter,
-        children: [
-          {
-            path: 'exercises/:exerciseId',
-            name: 'exercise',
-            component: Exercise,
-          },
-        ],
-      },
-    ],
-  },
+  { path: '/classroom/:classroomId', name: 'classroom', component: Classroom },
+  { path: '/courses/:courseId', name: 'course', component: Course },
+  { path: '/courses/:courseId/overview', name: 'course-overview', component: CourseOverview },
+  { path: '/courses/:courseId/chapters/:chapterId', name: 'chapter', component: Chapter },
+  { path: '/courses/:courseId/chapters/:chapterId/exercises', name: 'chapter-exercises', component: ChapterExercises },
+  { path: '/courses/:courseId/chapters/:chapterId/exercises/:exerciseId', name: 'exercise', component: Exercise },
 ];
 
 const router = createRouter({

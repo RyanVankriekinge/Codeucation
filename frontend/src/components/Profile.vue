@@ -4,13 +4,36 @@
             <img class="profile-picture" src="../assets/img/profilepicture.jpg">
         </div>
         <div class="profile-info-container" style="margin-top: 20px;">
-            <p class="profile-name">Ryan Vankriekinge</p>
-            <p class="profile-role">Leraar</p>
-            <router-link to="/profile" class="button-small-white button">Naar profiel</router-link>
-
+            <p v-if="user" class="profile-name">{{ user.firstname }} {{ user.name }}</p>
+            <p v-if="user" class="profile-role">{{ user.role }}</p>
+            <router-link v-if="user" to="/profile" class="button-small-white button">Naar profiel</router-link>
         </div>
     </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+const user = ref(null);
+async function fetchUserInfo() {
+  try {
+    const response = await fetch('http://localhost:3000/api/users/check-login', {
+      credentials: 'include'
+    });
+    const result = await response.json();
+    console.log('User Info:', result);
+    
+    if (result.success) {
+      user.value = result;
+    } else {
+      user.value = null;
+    }
+  } catch (error) {
+    console.error('Error fetching user info:', error);
+  }
+}
+
+onMounted(fetchUserInfo);
+</script>
 
 <style scoped>
 .profile-component-container {

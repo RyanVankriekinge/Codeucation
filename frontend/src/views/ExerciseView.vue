@@ -240,7 +240,7 @@ const checkCode = async () => {
     }
     console.log(feedback.status);
     result.value = feedback.message;
-    await fetch('http://localhost:3000/api/exerciseProgress', {
+    await fetch('http://localhost:3000/api/exercise-progress', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

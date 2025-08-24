@@ -71,25 +71,36 @@ const router = useRouter()
 const chapterId = route.params.chapterId
 const activeTab = ref('leerpad')
 
-onMounted(() => {
-  const savedTab = localStorage.getItem(`chapter-${chapterId}-activeTab`)
-  if (savedTab) activeTab.value = savedTab
+onMounted(async () => {
+  try {
+    const { data: chapterData } = await axios.get(
+      `http://localhost:3000/api/chapters/${chapterId}`,
+      { withCredentials: true }
+    )
+    let chapterInfo = chapterData.chapter
+    const { data: progressData } = await axios.get(
+      `http://localhost:3000/api/exercise-progress/progress/${chapterId}/current-user`,
+      { withCredentials: true }
+    )
+    if (progressData?.chapter?.exercises) {
+      chapterInfo.exercises = progressData.chapter.exercises
+    }
+
+    chapter.value = chapterInfo
+    const savedTab = localStorage.getItem(`chapter-${chapterId}-activeTab`)
+    if (savedTab) activeTab.value = savedTab
+
+  } catch (error) {
+    console.error('Error loading chapter or progress:', error)
+  }
 })
+
 
 watch(activeTab, (newVal) => {
   localStorage.setItem(`chapter-${chapterId}-activeTab`, newVal)
 })
 
 const chapter = ref(null)
-
-onMounted(async () => {
-  try {
-    const { data } = await axios.get(`http://localhost:3000/api/chapters/${chapterId}`)
-    chapter.value = data.chapter
-  } catch (error) {
-    console.error('Error loading chapter:', error)
-  }
-})
 
 function goToExercise(exerciseId) {
   router.push(`/courses/${chapter.value.courseId}/chapters/${chapterId}/exercises/${exerciseId}`)
@@ -162,11 +173,12 @@ function goToExercise(exerciseId) {
 .exercise-status {
   padding: 10px;
   background-color: #031F67;
-  width: fit-content;
+  width: 100px;
   text-align: center;
   color: white;
   border-radius: 7px;
   margin-left: 10px;
+  margin-right: 10px;
 }
 
 .naar-oefening{
@@ -183,6 +195,6 @@ function goToExercise(exerciseId) {
 .exercise-right-side{
   display: flex;
   justify-content: space-between;
-  width: 350px;
+  width: 400px;
 }
 </style>

@@ -140,7 +140,7 @@ def is_prime(n):
     - [BugBytes (back-end)](https://github.com/EHB-MCT/web2-course-project-back-end-RyanVankriekinge)
 
 14. **Searching by ID in MongoDB**  
-    Referenced [How to search by ID in MongoDB](https://www.geeksforgeeks.org/how-to-search-by-id-in-mongodb/).
+    Used [How to search by ID in MongoDB](https://www.geeksforgeeks.org/how-to-search-by-id-in-mongodb/).
 
 15. **MongoDB Compass Mongosh commands**  
     Used [MongoDB Shell Documentation](https://www.mongodb.com/docs/mongodb-shell/run-commands/) for running shell commands in MongoDB.
@@ -167,13 +167,13 @@ def is_prime(n):
     Based on [Easily Load an External Script Using JavaScript – Aaron Smith](https://aaronsmith.online/articles/easily-load-an-external-script-using-javascript)
 
 23. **Skulpt npm package & CDN**  
-    Referenced [jsDelivr Skulpt package](https://www.jsdelivr.com/package/npm/skulpt)
+    Used [jsDelivr Skulpt package](https://www.jsdelivr.com/package/npm/skulpt)
 
 24. **CodeMirror editor**  
     Used [CodeMirror official site](https://codemirror.net/) for integrating the code editor with syntax highlighting
 
 25. **Vue language support for CodeMirror**  
-    Referred to [codemirror/lang-vue GitHub repository](https://github.com/codemirror/lang-vue)
+    Used [codemirror/lang-vue GitHub repository](https://github.com/codemirror/lang-vue)
 
 26. **CodeMirror One Dark theme**  
     Implemented [One Dark theme for CodeMirror](https://www.npmjs.com/package/@codemirror/theme-one-dark)
@@ -181,3 +181,11 @@ def is_prime(n):
 27. **Apply padding to arrow in select item**  
     Used [StackOverflow - Padding doesn't apply to select html tag dropdown arrow](https://stackoverflow.com/questions/70162260/padding-doesnt-apply-to-select-html-tag-dropdown-arrow) apply padding to the selection arrow.
 
+28. **Speeding up mongoose queries**  
+    Used [MongooJS - Faster Mongoose queries with Lean](<https://mongoosejs.com/docs/tutorials/lean.html#:~:text=The%20lean%20option%20tells%20Mongoose,POJOs)%2C%20not%20Mongoose%20documents.>) to create quicker queries
+
+29. **Links to URLs containing parantheses in Marksdown**  
+    Used [Meta - Links to URLs containing parantheses](https://meta.stackexchange.com/questions/13501/links-to-urls-containing-parentheses) to link to URLs in marksdown when containing parantheses.
+
+30. **Using Mongoose**  
+    Used [Mongoose doucmentation](https://mongoosejs.com/docs/) to use the mongoose library.

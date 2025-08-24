@@ -47,7 +47,7 @@ app.use('/api/chapters', chapterRoutes);
 app.use('/api/classroom-courses', classroomCourseRoutes);
 app.use('/api/exercises', exerciseRoutes);
 app.use('/api/exerciseValidationCode', exerciseValidationCodeRoutes);
-app.use('/api/exerciseProgress', exerciseProgressRoutes);
+app.use('/api/exercise-progress', exerciseProgressRoutes);
 
 
 // Connect to MongoDB and start server

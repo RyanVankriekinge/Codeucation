@@ -5,7 +5,7 @@
         <div class="section">
           <div class="column66">
             <h1>{{ course?.title }}</h1>
-            <h2>Aangeboden door {{ course?.provider }}</h2>
+            <h2>Aangeboden door Codeucation</h2>
 
             <h3>Inhoud van deze cursus</h3>
             <p class="course-description">{{ course?.description }}</p>
@@ -61,12 +61,13 @@ import { useRoute } from 'vue-router';
 import axios from 'axios';
 
 const route = useRoute();
-const courseId = route.params.id;
+const courseId = route.params.courseId;
 const course = ref(null);
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get(`http://localhost:3000/api/courses/${route.params.courseId}`);
+    console.log('courseId:', courseId);
+    const { data } = await axios.get(`http://localhost:3000/api/courses/${courseId}/user`, { withCredentials: true });
     console.log(data);
     course.value = data;
   } catch (error) {

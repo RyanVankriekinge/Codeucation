@@ -10,7 +10,7 @@
             <h3>Inhoud van deze cursus</h3>
             <p class="course-description">{{ course?.description }}</p>
 
-            <router-link :to="`/course/${courseId}/overview`">
+            <router-link :to="`/courses/${courseId}/overview`">
               <button class="big-button">Leer deze cursus</button>
             </router-link>
 

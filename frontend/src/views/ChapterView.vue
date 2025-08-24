@@ -152,7 +152,7 @@ function goToExercise(exerciseId) {
 .exercise-status {
   padding: 10px;
   background-color: #031F67;
-  width: 50px;
+  width: fit-content;
   text-align: center;
   color: white;
   border-radius: 7px;

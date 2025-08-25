@@ -11,18 +11,17 @@
 
             <h3>Huidig hoofdstuk</h3>
             <div class="chapters-container" v-if="currentChapter">
-              <router-link :to="`/course/chapter/${currentChapter._id}`" class="chapter-link">
+              <router-link :to="`/courses/${courseId}/chapters/${currentChapter._id}`" class="chapter-link">
                 <div class="chapter-container">
                   <h4 class="chapter-title">{{ currentChapter.title }}</h4>
                   <div class="chapter-info">
                     <progress class="course-progress" max="100" :value="currentChapter.progress"></progress>
                     <div class="button-continue">
                       <p>Verdergaan</p>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="11.739" height="20.478" viewBox="0 0 11.739 20.478">
-                        <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right"
-                          d="M12,6l8.118,8.118L12,22.235"
-                          transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round"
-                          stroke-linejoin="round" stroke-width="3" />
+                      <svg xmlns="http://www.w3.org/2000/svg" width="9" height="17" viewBox="0 0 18.621 34.243">
+                        <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right" d="M12,6,27,21,12,36"
+                          transform="translate(-9.879 -3.879)" fill="none" stroke="#707070" stroke-linecap="round"
+                          stroke-linejoin="round" stroke-width="3"/>
                       </svg>
                     </div>
                   </div>
@@ -32,7 +31,7 @@
 
             <h3>Hoofdstuk kiezen</h3>
             <div class="chapters-container">
-              <router-link v-for="chapter in chapters" :key="chapter._id" :to="`/course/chapter/${chapter._id}`"
+              <router-link v-for="chapter in chapters" :key="chapter._id" :to="`/courses/${courseId}/chapters/${chapter._id}`"
                 class="chapter-link">
                 <div class="chapter-container">
                   <h4 class="chapter-title">{{ chapter.title }}</h4>
@@ -40,11 +39,10 @@
                     <progress class="course-progress" max="100" :value="chapter.progress"></progress>
                     <div class="button-continue">
                       <p>Verdergaan</p>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="11.739" height="20.478" viewBox="0 0 11.739 20.478">
-                        <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right"
-                          d="M12,6l8.118,8.118L12,22.235"
-                          transform="translate(-9.879 -3.879)" fill="none" stroke="#031F67" stroke-linecap="round"
-                          stroke-linejoin="round" stroke-width="3" />
+                      <svg xmlns="http://www.w3.org/2000/svg" width="9" height="17" viewBox="0 0 18.621 34.243">
+                        <path id="Icon_akar-chevron-right" data-name="Icon akar-chevron-right" d="M12,6,27,21,12,36"
+                          transform="translate(-9.879 -3.879)" fill="none" stroke="#707070" stroke-linecap="round"
+                          stroke-linejoin="round" stroke-width="3"/>
                       </svg>
                     </div>
                   </div>

@@ -82,27 +82,62 @@ const courseId = route.params.courseId;
 
 onMounted(async () => {
   try {
-    const { data: courseData } = await axios.get(`http://localhost:3000/api/courses/${courseId}`);
+    const { data: courseData } = await axios.get(
+      `http://localhost:3000/api/courses/${courseId}`,
+      { withCredentials: true }
+    );
     course.value = courseData;
     chapters.value = courseData.chapters || [];
     currentChapter.value = chapters.value[0] || null;
-    exercises.value = [];
-    for (const ch of chapters.value) {
-      if (ch._id) {
-        const { data: exData } = await axios.get(`http://localhost:3000/api/exercises/chapter/${ch._id}`);
-        exercises.value.push(...exData.map(ex => ({
-          _id: ex._id,
-          title: ex.title,
-          chapterId: ex.chapterId
-        })));
+
+    const exercisesData = [];
+    for (const chapter of chapters.value) {
+      const { data: chapterProgressData } = await axios.get(
+        `http://localhost:3000/api/exercise-progress/progress/${chapter._id}/current-user`,
+        { withCredentials: true }
+      );
+      const chapterExercises = chapterProgressData.chapter.exercises || [];
+      exercisesData.push(...chapterExercises.map(exercise => ({
+        _id: exercise._id,
+        title: exercise.title,
+        chapterId: exercise.chapterId,
+        status: exercise.status || 'Niet gemaakt'
+      })));
+    }
+    exercises.value = exercisesData;
+
+    function getExerciseProgress(exercise) {
+      switch (exercise.status) {
+        case 'Klaar': return 1;
+        case 'Gedeeltelijk juist': return 0.5;
+        default: return 0;
       }
     }
-    console.log('exercises:', exercises.value);
+
+    function calculateChapterProgress(chapterExercises) {
+      if (!chapterExercises.length) return 0;
+      const totalProgress = chapterExercises.reduce((sum, ex) => sum + getExerciseProgress(ex), 0);
+      return (totalProgress / chapterExercises.length) * 100;
+    }
+
+    chapters.value.forEach(chapter => {
+      const chExercises = exercises.value.filter(exercise => exercise.chapterId === chapter._id);
+      console.log(`Chapter ${chapter.title} statuses:`, chExercises.map(e => e.status));
+      chapter.progress = calculateChapterProgress(chExercises);
+    });
+
+    function calculateCourseProgress(allChapters) {
+      if (!allChapters.length) return 0;
+      const total = allChapters.reduce((sum, chapter) => sum + (chapter.progress || 0), 0);
+      return total / allChapters.length;
+    }
+
+    course.value.progress = calculateCourseProgress(chapters.value);
+
   } catch (error) {
     console.error('Error fetching course data:', error);
   }
 });
-
 
 
 </script>

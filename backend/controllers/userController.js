@@ -6,6 +6,8 @@ const UserClassroom = require('../models/UserClassroom');
 const ClassroomCourse = require('../models/ClassroomCourse');
 const Course = require('../models/Course');
 const Chapter = require('../models/Chapter');
+const Exercise = require('../models/Exercise');
+const ExerciseProgress = require('../models/ExerciseProgress');
 
 exports.registerUser = async (req, res) => {
     const { name, firstname, email, password, role } = req.body;
@@ -124,6 +126,47 @@ exports.getCoursesForUser = async (req, res) => {
         res.json({ success: true, user, courses: coursesWithChapters });
     } catch (error) {
         console.error('Error getting courses for user:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
+
+exports.getCourseProgressForUser = async (req, res) => {
+    try {
+        const { userId, courseId } = req.params;
+
+        const course = await Course.findById(courseId).lean();
+        if (!course) {
+            return res.status(404).json({ success: false, message: 'Course not found' });
+        }
+
+        const chapters = await Chapter.find({ courseId }).lean();
+        const exercises = await Exercise.find({ chapterId: { $in: chapters.map(c => c._id) } }).lean();
+
+        const progress = await ExerciseProgress.find({ userId, courseId }).lean();
+
+        const chaptersWithProgress = chapters.map(chapter => ({
+            ...chapter,
+            exercises: exercises
+                .filter(e => e.chapterId.toString() === chapter._id.toString())
+                .map(ex => {
+                    const exProgress = progress.find(p => p.exerciseId.toString() === ex._id.toString());
+                    return {
+                        ...ex,
+                        status: exProgress ? exProgress.status : 'Niet gemaakt'
+                    };
+                })
+        }));
+
+        res.json({
+            success: true,
+            course: {
+                ...course,
+                chapters: chaptersWithProgress
+            }
+        });
+
+    } catch (err) {
+        console.error('Error fetching user progress for course:', err);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };

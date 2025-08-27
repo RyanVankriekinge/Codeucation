@@ -23,7 +23,7 @@
                   stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
               </svg>
             </div>
-            <h2 style="margin-top: 20px;"> {{ currentCourse.title || 'Naam' }}</h2>
+            <h2 v-if="currentCourse" style="margin-top: 20px;">{{ currentCourse.title }}</h2>
             <div v-if="currentCourse" style="width: 100%;">
               <div v-for="chapter in currentCourse.chapters" :key="chapter._id" class="chapter-container">
                 <div class="chapter-header" @click="chapter.open = !chapter.open">

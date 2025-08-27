@@ -142,7 +142,10 @@ exports.getCourseProgressForUser = async (req, res) => {
         const chapters = await Chapter.find({ courseId }).lean();
         const exercises = await Exercise.find({ chapterId: { $in: chapters.map(c => c._id) } }).lean();
 
-        const progress = await ExerciseProgress.find({ userId, courseId }).lean();
+        const progress = await ExerciseProgress.find({
+            userId: new mongoose.Types.ObjectId(userId),
+            exerciseId: { $in: exercises.map(e => e._id) }
+        }).lean();
 
         const chaptersWithProgress = chapters.map(chapter => ({
             ...chapter,

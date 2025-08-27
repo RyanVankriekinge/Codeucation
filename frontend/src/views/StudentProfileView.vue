@@ -44,6 +44,8 @@
                     @click="goToExercise(currentCourse._id, chapter._id, exercise._id)">
                     <h4 class="exercise-title paragraph">{{ exercise.title }}</h4>
                     <div class="exercise-right-side">
+                      <progress class="exercise-progress" max="100"
+                        :value="getExerciseProgressValue(exercise)"></progress>
                     </div>
                   </div>
                 </div>
@@ -141,6 +143,14 @@ const goToExercise = (courseId, chapterId, exerciseId) => {
   router.push(`/courses/${courseId}/chapters/${chapterId}/exercises/${exerciseId}`)
 }
 
+const getExerciseProgressValue = (exercise) => {
+  console.log(exercise.status)
+  const status = (exercise.status || '').toLowerCase()
+  if (status === 'klaar' || status === 'done') return 100
+  if (status === 'gedeeltelijk juist' || status === 'partially correct') return 50
+  return 0
+}
+
 onMounted(fetchCourses)
 </script>
 
@@ -161,7 +171,7 @@ onMounted(fetchCourses)
   cursor: pointer;
 }
 
-.chapter-header h3{
+.chapter-header h3 {
   margin: auto 20px;
   padding: 10px 0px;
 }
@@ -184,11 +194,37 @@ onMounted(fetchCourses)
   gap: 10px;
 }
 
-.exercise-title{
+.exercise-title {
   margin: 5px 0px;
 }
 
-.exercise-list{
+.exercise-list {
   padding-bottom: 10px;
+}
+
+.exercise-progress {
+  width: 150px;
+  height: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #031F67;
+}
+
+.exercise-progress::-webkit-progress-bar {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.exercise-progress::-webkit-progress-value {
+  background-color: #031F67;
+  border-radius: 10px;
+}
+
+.exercise-progress::-moz-progress-bar {
+  background-color: #031F67;
+  border-radius: 10px;
 }
 </style>

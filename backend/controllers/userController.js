@@ -1,5 +1,11 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+
+const UserClassroom = require('../models/UserClassroom');
+const ClassroomCourse = require('../models/ClassroomCourse');
+const Course = require('../models/Course');
+const Chapter = require('../models/Chapter');
 
 exports.registerUser = async (req, res) => {
     const { name, firstname, email, password, role } = req.body;
@@ -87,4 +93,37 @@ exports.logout = (req, res) => {
         res.clearCookie('connect.sid');
         res.json({ success: true, message: 'Logged out successfully' });
     });
+};
+
+exports.getCoursesForUser = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const user = await User.findById(userId)
+            .select('firstname name username email role')
+            .lean();
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        const userClassrooms = await UserClassroom.find({ userId }).lean();
+        const classroomIds = userClassrooms.map(uc => uc.classroomId);
+
+        const classroomCourses = await ClassroomCourse.find({
+            classroomId: { $in: classroomIds }
+        }).lean();
+
+        const courseIds = classroomCourses.map(cc => cc.courseId);
+        const courses = await Course.find({ _id: { $in: courseIds } }).lean();
+        const coursesWithChapters = await Promise.all(
+            courses.map(async course => {
+                const chapters = await Chapter.find({ courseId: course._id }).lean();
+                return { ...course, chapters };
+            })
+        );
+        res.json({ success: true, user, courses: coursesWithChapters });
+    } catch (error) {
+        console.error('Error getting courses for user:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
 };

@@ -42,16 +42,8 @@
                 <div v-show="chapter.open" class="exercise-list">
                   <div v-for="exercise in chapter.exercises || []" :key="exercise._id" class="exercise-list-item"
                     @click="goToExercise(currentCourse._id, chapter._id, exercise._id)">
-                    <h4 class="exercise-title">{{ exercise.title }}</h4>
+                    <h4 class="exercise-title paragraph">{{ exercise.title }}</h4>
                     <div class="exercise-right-side">
-                      <p class="exercise-status">{{ exercise.status || 'Niet gemaakt' }}</p>
-                      <div class="naar-oefening">
-                        <p>Naar oefening</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="17" viewBox="0 0 18.621 34.243">
-                          <path d="M12,6,27,21,12,36" fill="none" stroke="#707070" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="3" />
-                        </svg>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -171,15 +163,14 @@ onMounted(fetchCourses)
 
 .chapter-header h3{
   margin: auto 20px;
+  padding: 10px 0px;
 }
 
 .exercise-list-item {
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  border-radius: 10px;
-  background-color: #f0f4ff;
-  margin: 5px 10px;
+  margin: 5px 20px;
   cursor: pointer;
 }
 
@@ -193,13 +184,11 @@ onMounted(fetchCourses)
   gap: 10px;
 }
 
-.exercise-status {
-  font-weight: bold;
+.exercise-title{
+  margin: 5px 0px;
 }
 
-.naar-oefening {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+.exercise-list{
+  padding-bottom: 10px;
 }
 </style>

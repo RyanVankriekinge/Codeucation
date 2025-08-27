@@ -23,11 +23,11 @@
                   stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
               </svg>
             </div>
-
+            <h2 style="margin-top: 20px;"> {{ currentCourse.title || 'Naam' }}</h2>
             <div v-if="currentCourse" style="width: 100%;">
               <div v-for="chapter in currentCourse.chapters" :key="chapter._id" class="chapter-container">
                 <div class="chapter-header" @click="chapter.open = !chapter.open">
-                  <h3>{{ chapter.title }}</h3>
+                  <h3>{{ chapter.orderIndex }}. {{ chapter.title }}</h3>
                   <svg v-if="!chapter.open" xmlns="http://www.w3.org/2000/svg" width="20" height="12"
                     viewBox="0 0 44.047 23.523">
                     <path d="M6,13.5,25.9,33.4,45.8,13.5" transform="translate(-3.879 -11.379)" fill="none"
@@ -114,7 +114,7 @@ onMounted(fetchCourses)
 <style scoped>
 .chapter-container {
   margin-bottom: 20px;
-  background-color: #e6f0ff;
+  background-color: #a6cced;
   border-radius: 10px;
   width: 100%;
 }

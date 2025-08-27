@@ -67,7 +67,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import axios from 'axios'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -88,11 +88,14 @@ const fetchCourses = async () => {
     )
     if (data.success) {
       user.value = data.user
-      courses.value = data.courses
-      courses.value.forEach(course => {
-        course.chapters.forEach(chapter => chapter.open = false)
-      })
-
+      courses.value = data.courses.map(course => ({
+        ...course,
+        chapters: course.chapters.map(chapter => ({
+          ...chapter,
+          open: false,
+          exercises: chapter.exercises || []
+        }))
+      }))
       if (courses.value.length) currentCourseId.value = courses.value[0]._id
     }
   } catch (err) {
@@ -101,7 +104,45 @@ const fetchCourses = async () => {
 }
 
 const currentCourse = computed(() => {
-  return courses.value.find(c => c._id === currentCourseId.value)
+  return courses.value.find(c => c._id === currentCourseId.value) || null
+})
+
+const fetchCourseProgress = async (courseId) => {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:3000/api/users/${userId}/courses/${courseId}/progress`,
+      { withCredentials: true }
+    )
+
+    if (data.success) {
+      const courseIndex = courses.value.findIndex(c => c._id === courseId)
+      if (courseIndex !== -1) {
+        const previousChapters = courses.value[courseIndex].chapters
+        const updatedCourse = data.course
+
+        const mergedChapters = updatedCourse.chapters.map(chapter => {
+          const previous = previousChapters.find(prev => prev._id === chapter._id)
+          return {
+            ...chapter,
+            open: previous ? previous.open : false,
+            exercises: chapter.exercises || []
+          }
+        })
+
+        courses.value[courseIndex] = {
+          ...courses.value[courseIndex],
+          ...updatedCourse,
+          chapters: mergedChapters
+        }
+      }
+    }
+  } catch (err) {
+    console.error('Error fetching course progress:', err)
+  }
+}
+
+watch(currentCourseId, (newCourseId) => {
+  if (newCourseId) fetchCourseProgress(newCourseId)
 })
 
 const goToExercise = (courseId, chapterId, exerciseId) => {
@@ -110,6 +151,7 @@ const goToExercise = (courseId, chapterId, exerciseId) => {
 
 onMounted(fetchCourses)
 </script>
+
 
 <style scoped>
 .chapter-container {

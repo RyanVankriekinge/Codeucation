@@ -3,11 +3,11 @@
     <div class="outer-wrapper">
       <div class="wrapper">
         <div class="section">
-          <div class="column66">
+          <div class="full-width">
             <h1>{{ title }}</h1>
             <h2>{{ course?.title }}: {{ chapter?.title }}</h2>
 
-            <label class="paragraph" for="exerciseSelect">Huidige oefening: </label>
+            <label class="paragraph" for="exerciseSelect" style="margin-right: 10px;">Huidige oefening: </label>
             <div class="custom-select">
               <select v-model="currentExerciseId" id="exerciseSelect" class="paragraph" @focus="isOpen = true"
                 @blur="isOpen = false">

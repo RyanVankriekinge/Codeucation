@@ -11,6 +11,7 @@ import CourseOverview from '../views/CourseOverviewView.vue';
 import Chapter from '../views/ChapterView.vue';
 import ChapterExercises from '../views/ChapterExercisesView.vue';
 import Exercise from '../views/ExerciseView.vue';
+import StudentProfileView from '../views/StudentProfileView.vue';
 
 const routes = [
   { path: '/', name: 'home', component: Home },
@@ -24,6 +25,7 @@ const routes = [
   { path: '/courses/:courseId/chapters/:chapterId', name: 'chapter', component: Chapter },
   { path: '/courses/:courseId/chapters/:chapterId/exercises', name: 'chapter-exercises', component: ChapterExercises },
   { path: '/courses/:courseId/chapters/:chapterId/exercises/:exerciseId', name: 'exercise', component: Exercise },
+  { path: '/courses/:courseId/student/:userId', name: 'student-profile', component: StudentProfileView},
 ];
 
 const router = createRouter({

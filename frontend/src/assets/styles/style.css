@@ -90,6 +90,11 @@ body {
   margin-top: 50px;
 }
 
+.full-width{
+  width: 100%;
+  max-width: 800px;
+}
+
 .column50{
   width: 48%;
 }

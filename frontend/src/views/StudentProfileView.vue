@@ -2,10 +2,10 @@
   <main>
     <div class="outer-wrapper">
       <div class="wrapper">
-        <div class="section" style="margin-bottom: 50px;">
-          <div class="column66">
+        <div class="section">
+          <div class="full-width">
             <h1 style="margin-bottom: 10px;">
-              {{ user.firstname || 'Voornaam' }} {{ user.name || 'Achternaam' }}
+              {{ user.firstname || 'Naam' }} {{ user.name || 'Leerling' }}
             </h1>
 
             <label for="courseSelect" class="paragraph" style="margin-right: 10px;">Selecteer cursus:</label>
@@ -56,62 +56,33 @@
 
               </div>
             </div>
+
           </div>
-          <ProfileLogOut />
         </div>
       </div>
     </div>
   </main>
 </template>
-<script setup>
-import ProfileLogOut from '../components/ProfileLogOut.vue'
 
+<script setup>
 import { ref, onMounted, computed, watch } from 'vue'
 import axios from 'axios'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
+const route = useRoute()
 const router = useRouter()
 
-const userId = ref(null)
+const userId = route.params.userId
 const user = ref({ firstname: '', name: '' })
 const courses = ref([])
 const currentCourseId = ref(null)
 const isOpen = ref(false)
 const courseProgress = ref(0)
 
-async function checkLogin() {
-  try {
-    const response = await fetch('http://localhost:3000/api/users/check-login', {
-      credentials: 'include'
-    })
-    const result = await response.json()
-    console.log('Check-login response:', result)
-
-    if (result.success && result.userId) {
-      user.value = {
-        firstname: result.firstname || '',
-        name: result.name || '',
-        username: result.username,
-        email: result.email,
-        role: result.role
-      }
-      userId.value = result.userId
-    } else {
-      user.value = null
-      router.push('/login')
-    }
-  } catch (error) {
-    console.error('Failed to fetch user:', error)
-    router.push('/login')
-  }
-}
-
-
 const fetchCourses = async () => {
-  if (!userId.value) return
   try {
     const { data } = await axios.get(
-      `http://localhost:3000/api/users/${userId.value}/courses`,
+      `http://localhost:3000/api/users/${userId}/courses`,
       { withCredentials: true }
     )
     if (data.success) {
@@ -136,10 +107,9 @@ const currentCourse = computed(() => {
 })
 
 const fetchCourseProgress = async (courseId) => {
-  if (!userId.value) return
   try {
     const { data } = await axios.get(
-      `http://localhost:3000/api/users/${userId.value}/courses/${courseId}/progress`,
+      `http://localhost:3000/api/users/${userId}/courses/${courseId}/progress`,
       { withCredentials: true }
     )
 
@@ -199,6 +169,7 @@ watch(currentCourse, (course) => {
   courseProgress.value = course.chapters.length
     ? course.chapters.reduce((sum, ch) => sum + (ch.progress || 0), 0) / course.chapters.length
     : 0
+
 }, { immediate: true })
 
 const goToExercise = (courseId, chapterId, exerciseId) => {
@@ -212,10 +183,7 @@ const getExerciseProgressValue = (exercise) => {
   return 0
 }
 
-onMounted(async () => {
-  await checkLogin()
-  await fetchCourses()
-})
+onMounted(fetchCourses)
 </script>
 
 <style scoped>

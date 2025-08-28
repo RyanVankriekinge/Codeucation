@@ -1,5 +1,13 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+
+const UserClassroom = require('../models/UserClassroom');
+const ClassroomCourse = require('../models/ClassroomCourse');
+const Course = require('../models/Course');
+const Chapter = require('../models/Chapter');
+const Exercise = require('../models/Exercise');
+const ExerciseProgress = require('../models/ExerciseProgress');
 
 exports.registerUser = async (req, res) => {
     const { name, firstname, email, password, role } = req.body;
@@ -87,4 +95,81 @@ exports.logout = (req, res) => {
         res.clearCookie('connect.sid');
         res.json({ success: true, message: 'Logged out successfully' });
     });
+};
+
+exports.getCoursesForUser = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const user = await User.findById(userId)
+            .select('firstname name username email role')
+            .lean();
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        const userClassrooms = await UserClassroom.find({ userId }).lean();
+        const classroomIds = userClassrooms.map(uc => uc.classroomId);
+
+        const classroomCourses = await ClassroomCourse.find({
+            classroomId: { $in: classroomIds }
+        }).lean();
+
+        const courseIds = classroomCourses.map(cc => cc.courseId);
+        const courses = await Course.find({ _id: { $in: courseIds } }).lean();
+        const coursesWithChapters = await Promise.all(
+            courses.map(async course => {
+                const chapters = await Chapter.find({ courseId: course._id }).lean();
+                return { ...course, chapters };
+            })
+        );
+        res.json({ success: true, user, courses: coursesWithChapters });
+    } catch (error) {
+        console.error('Error getting courses for user:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
+
+exports.getCourseProgressForUser = async (req, res) => {
+    try {
+        const { userId, courseId } = req.params;
+
+        const course = await Course.findById(courseId).lean();
+        if (!course) {
+            return res.status(404).json({ success: false, message: 'Course not found' });
+        }
+
+        const chapters = await Chapter.find({ courseId }).lean();
+        const exercises = await Exercise.find({ chapterId: { $in: chapters.map(c => c._id) } }).lean();
+
+        const progress = await ExerciseProgress.find({
+            userId: new mongoose.Types.ObjectId(userId),
+            exerciseId: { $in: exercises.map(e => e._id) }
+        }).lean();
+
+        const chaptersWithProgress = chapters.map(chapter => ({
+            ...chapter,
+            exercises: exercises
+                .filter(e => e.chapterId.toString() === chapter._id.toString())
+                .map(ex => {
+                    const exProgress = progress.find(p => p.exerciseId.toString() === ex._id.toString());
+                    return {
+                        ...ex,
+                        status: exProgress ? exProgress.status : 'Niet gemaakt'
+                    };
+                })
+        }));
+
+        res.json({
+            success: true,
+            course: {
+                ...course,
+                chapters: chaptersWithProgress
+            }
+        });
+
+    } catch (err) {
+        console.error('Error fetching user progress for course:', err);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
 };

@@ -13,9 +13,7 @@
             </ul>
           </div>
           <div class="login-button">
-            <router-link
-              :to="user ? '/profile' : '/login'"
-              class="button-small-white">
+            <router-link :to="user ? '/profile' : '/login'" class="button-small-white">
               {{ user ? user.firstname : 'Log in' }}
             </router-link>
           </div>
@@ -27,16 +25,26 @@
         <div class="wrapper">
           <div class="section introduction">
             <div class="column50">
-              <p class="introduction-subtitle">Lesgeven met vertrouwen dankzij leerpaden en geautomatiseerde code testing</p>
+              <p class="introduction-subtitle">Lesgeven met vertrouwen dankzij leerpaden en geautomatiseerde code
+                testing</p>
               <p class="introduction-title">Leer programmeren met directe feedback!</p>
               <button class="big-button-white" @click="goToLogin">
                 Ga aan de slag!
               </button>
             </div>
             <div class="column50">
-              <div id="placeholder" style="width:100%; height:100%; background:#ccc; text-align:center; font-size:20px; cursor:pointer; line-height: 8; border-radius: 20px;">
-                <p style="margin: auto; height: 100%;">Video placeholder</p>
-              </div>
+  <div id="placeholder" style="width:100%; height:100%; border-radius:20px; overflow:hidden;">
+    <video 
+      src="/videos/showreel.mp4" 
+      width="100%" 
+      height="100%" 
+      controls 
+      autoplay 
+      loop 
+      muted 
+      playsinline
+    ></video>
+  </div>
             </div>
           </div>
         </div>
@@ -63,44 +71,44 @@
 </template>
 
 <script setup>
-  import { useRoute, useRouter } from 'vue-router';
-  import { computed, ref, onMounted, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { computed, ref, onMounted, watch } from 'vue';
 
-  const route = useRoute();
-  const router = useRouter();
+const route = useRoute();
+const router = useRouter();
 
-  const isHome = computed(() => route?.name === 'home');
-  const hideNav = computed(() => ['login', 'register'].includes(route?.name));
+const isHome = computed(() => route?.name === 'home');
+const hideNav = computed(() => ['login', 'register'].includes(route?.name));
 
-  const user = ref(null);
+const user = ref(null);
 
-  function goToLogin() {
-    router.push('/login');
-  }
+function goToLogin() {
+  router.push('/login');
+}
 
-  async function checkLogin() {
-    try {
-      const response = await fetch('http://localhost:3000/api/users/check-login', {
-        credentials: 'include'
-      });
-      const result = await response.json();
-      console.log('Check-login response:', result);
-      if (result.success) {
-        user.value = result;
-      } else {
-        user.value = null;
-      }
-    } catch (error) {
-      console.error('Failed to fetch user:', error);
+async function checkLogin() {
+  try {
+    const response = await fetch('http://localhost:3000/api/users/check-login', {
+      credentials: 'include'
+    });
+    const result = await response.json();
+    console.log('Check-login response:', result);
+    if (result.success) {
+      user.value = result;
+    } else {
+      user.value = null;
     }
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
   }
+}
 
-  onMounted(checkLogin);
+onMounted(checkLogin);
 
-  watch(
-    () => route.fullPath,
-    () => {
-      checkLogin();
-    }
-  );
+watch(
+  () => route.fullPath,
+  () => {
+    checkLogin();
+  }
+);
 </script>

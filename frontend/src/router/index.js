@@ -12,11 +12,13 @@ import Chapter from '../views/ChapterView.vue';
 import ChapterExercises from '../views/ChapterExercisesView.vue';
 import Exercise from '../views/ExerciseView.vue';
 import StudentProfileView from '../views/StudentProfileView.vue';
+import HandleidingView from '../views/HandleidingView.vue';
 
 const routes = [
   { path: '/', name: 'home', component: Home },
   { path: '/login', name: 'login', component: Login },
   { path: '/register', name: 'register', component: Register },
+  { path: '/handleiding', name: 'handleiding', component: HandleidingView },
   { path: '/dashboard', name: 'dashboard', component: Dashboard, meta: { requiresAuth: true } },
   { path: '/profile', name: 'profile', component: Profile, meta: { requiresAuth: true } },
   { path: '/classroom/:classroomId', name: 'classroom', component: Classroom, meta: { requiresAuth: true } },

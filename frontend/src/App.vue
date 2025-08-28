@@ -9,7 +9,7 @@
             </router-link>
             <ul class="nav-links">
               <li v-if="user"><router-link to="/dashboard">Klassen</router-link></li>
-              <li><router-link to="/">Handleiding</router-link></li>
+              <li><router-link to="/handleiding">Handleiding</router-link></li>
             </ul>
           </div>
           <div class="login-button">
